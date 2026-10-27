@@ -1,0 +1,37 @@
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Shape of the Dataset}}{13}{figure.caption.15}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Dataset Information}}{13}{figure.caption.16}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Data Types of Dataset Attributes}}{13}{figure.caption.17}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Missing Value Analysis}}{13}{figure.caption.18}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Duplicate Record Analysis}}{13}{figure.caption.19}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Statistical Summary of Numerical Attributes}}{14}{figure.caption.20}%
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Class Count Summary of Review Labels}}{14}{figure.caption.21}%
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Distribution of Deceptive and Truthful Reviews}}{18}{figure.caption.23}%
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Distribution of Review Length}}{18}{figure.caption.24}%
+\contentsline {figure}{\numberline {3.10}{\ignorespaces VADER Compound Sentiment Distribution by Review Class}}{19}{figure.caption.25}%
+\contentsline {figure}{\numberline {3.11}{\ignorespaces Correlation Heatmap of Engineered Features}}{20}{figure.caption.26}%
+\contentsline {figure}{\numberline {3.12}{\ignorespaces Activity Diagram of Logistic Regression}}{24}{figure.caption.27}%
+\contentsline {figure}{\numberline {3.13}{\ignorespaces Activity Diagram of Random Forest}}{27}{figure.caption.28}%
+\contentsline {figure}{\numberline {3.14}{\ignorespaces Activity Diagram of Linear Support Vector Machine}}{30}{figure.caption.29}%
+\contentsline {figure}{\numberline {3.15}{\ignorespaces Project Pipeline}}{32}{figure.caption.30}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Configuration of Machine-Learning Models Used for Training}}{39}{figure.caption.34}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Training of Machine-Learning Models}}{39}{figure.caption.35}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Prediction of Class Labels and Scores on the Test Dataset}}{40}{figure.caption.36}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Performance Comparison of Model--Feature-Set Combinations}}{42}{figure.caption.37}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Accuracy Comparison Across Feature Sets and Classification Models}}{45}{figure.caption.38}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces F1-score Comparison Across Feature Sets and Classification Models}}{45}{figure.caption.39}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces ROC Curve Comparison for TF-IDF + VADER Models}}{46}{figure.caption.40}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Confusion Matrix of Logistic Regression with TF-IDF + VADER}}{47}{figure.caption.41}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Hotel review classification result and prediction probabilities.}}{54}{figure.caption.45}%
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Explanation of the prediction process and Logistic Regression decision score.}}{54}{figure.caption.46}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {7.1}{\ignorespaces GitHub repository}}{55}{figure.caption.47}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }

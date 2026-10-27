@@ -1,0 +1,55 @@
+\contentsline {chapter}{Acknowledgement}{i}{section*.2}%
+\contentsline {chapter}{Abstract}{ii}{section*.4}%
+\contentsline {chapter}{List of Tables}{iii}{section*.5}%
+\contentsline {chapter}{List of Figures}{iv}{section*.7}%
+\thispagestyle {empty}
+\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Supporting Literature}{2}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Literature Review}{2}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Literature Review Summary}{8}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Findings and Proposals}{9}{section.2.3}%
+\contentsline {chapter}{\numberline {3}System Analysis}{11}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Analysis of Dataset}{11}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}About the Dataset}{11}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Explore the Dataset}{12}{subsection.3.1.2}%
+\contentsline {section}{\numberline {3.2}Data Preprocessing}{14}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Data Cleaning}{14}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Analysis of Feature Variables}{16}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Analysis of Class Variables}{17}{subsection.3.2.3}%
+\contentsline {section}{\numberline {3.3}Data Visualization}{17}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Analysis of Algorithms}{20}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Detailed Study Report of the Proposed Algorithms}{21}{subsection.3.4.1}%
+\contentsline {section}{\numberline {3.5}Project Pipeline}{31}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}Project Pipeline Diagram and Development Plan}{31}{subsection.3.5.1}%
+\contentsline {section}{\numberline {3.6}Feasibility Analysis}{33}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}Technical Feasibility}{34}{subsection.3.6.1}%
+\contentsline {subsection}{\numberline {3.6.2}Operational Feasibility}{34}{subsection.3.6.2}%
+\contentsline {subsection}{\numberline {3.6.3}Economic Feasibility}{34}{subsection.3.6.3}%
+\contentsline {subsection}{\numberline {3.6.4}Schedule Feasibility}{34}{subsection.3.6.4}%
+\contentsline {section}{\numberline {3.7}System Environment}{35}{section.3.7}%
+\contentsline {subsection}{\numberline {3.7.1}Software Environment}{35}{subsection.3.7.1}%
+\contentsline {subsection}{\numberline {3.7.2}Hardware Environment}{35}{subsection.3.7.2}%
+\contentsline {chapter}{\numberline {4}System Design}{37}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Model Building}{37}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Implementation Code}{37}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Model Planning (Training / Test Split)}{38}{subsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.1.3}Training}{38}{subsection.4.1.3}%
+\contentsline {subsection}{\numberline {4.1.4}Testing (Performance Evaluation on Test Data)}{39}{subsection.4.1.4}%
+\contentsline {chapter}{\numberline {5}Results and Discussion}{41}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Model Performance and Evaluation}{41}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Feature Contribution Analysis}{43}{section.5.2}%
+\contentsline {section}{\numberline {5.3}ROC--AUC Analysis}{46}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Confusion Matrix Analysis}{46}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Prediction and Testing on Unseen Reviews}{48}{section.5.5}%
+\contentsline {subsection}{\numberline {5.5.1}Example Review Predictions}{48}{subsection.5.5.1}%
+\contentsline {subsection}{\numberline {5.5.2}Inference from External Testing}{51}{subsection.5.5.2}%
+\contentsline {section}{\numberline {5.6}Discussion of Findings}{51}{section.5.6}%
+\contentsline {chapter}{\numberline {6}Model Deployment}{53}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Model Implementation and User Interface Design}{53}{section.6.1}%
+\contentsline {chapter}{\numberline {7}Git History}{55}{chapter.7}%
+\contentsline {chapter}{\numberline {8}Conclusions}{56}{chapter.8}%
+\contentsline {chapter}{\numberline {9}Future Work}{57}{chapter.9}%
+\contentsline {chapter}{\numberline {10}Appendix}{58}{chapter.10}%
+\contentsline {section}{\numberline {10.1}Minimum Software Requirements}{58}{section.10.1}%
+\contentsline {section}{\numberline {10.2}Minimum Hardware Requirements}{58}{section.10.2}%
+\contentsline {chapter}{\numberline {11}References}{60}{chapter.11}%

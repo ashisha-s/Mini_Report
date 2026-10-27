@@ -1,0 +1,2170 @@
+\documentclass[12pt,a4paper]{report}
+
+% -------------------- PACKAGES --------------------
+\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+% \usepackage[T1]{fontenc}
+% \usepackage{mathptmx}        % Times New Roman clone (PDFLaTeX)
+
+% If you use XeLaTeX/LuaLaTeX, comment the three lines above and uncomment:
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Termes}
+
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{tocloft}
+\usepackage{emptypage}
+\usepackage{float}
+\usepackage{longtable}
+\usepackage{listings}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage{caption}
+\usepackage{booktabs}
+\usepackage{amsmath}
+
+\usepackage{enumitem}
+
+
+\lstdefinestyle{pycode}{
+  language=Python,
+  basicstyle=\ttfamily\footnotesize,
+  keywordstyle=\bfseries,
+  commentstyle=\itshape,
+  breaklines=true,
+  columns=fullflexible,
+  showstringspaces=false
+}
+\lstset{style=pycode}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=blue,
+    pdftitle={MiniProject Report},
+    pdfauthor={Tessa Tomy}
+}
+
+\onehalfspacing
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+% -------------------- HEADER / FOOTER SETUP --------------------
+\fancypagestyle{frontmatter}{
+    \fancyhf{}
+    \fancyhead[R]{Spectral Feature Engineering for Synthetic Speech Detection}
+    \renewcommand{\headrulewidth}{0.4pt}
+    \fancyfoot[L]{Department of Computer Applications,MACE}
+    \fancyfoot[R]{\thepage}
+    \renewcommand{\footrulewidth}{0.4pt}
+}
+
+\fancypagestyle{mainmatter}{
+    \fancyhf{}
+    \fancyhead[R]{Spectral Feature Engineering for Synthetic Speech Detection}
+    \renewcommand{\headrulewidth}{0.4pt}
+    \fancyfoot[L]{Department of Computer Applications,MACE}
+    \fancyfoot[R]{\thepage}
+    \renewcommand{\footrulewidth}{0.4pt}
+}
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
+\sloppy
+% TOC – no page number
+\fancypagestyle{notoc}{
+    \fancyhf{}
+    \fancyhead[R]{Spectral Feature Engineering for Synthetic Speech Detection}
+    \renewcommand{\headrulewidth}{0.4pt}
+    \fancyfoot[L]{Department of Computer Applications,MACE}
+    \fancyfoot[R]{}   % no page number
+    \renewcommand{\footrulewidth}{0.4pt}
+}
+
+% Plain override (used by \chapter) -> use mainmatter style
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \fancyhead[R]{Spectral Feature Engineering for Synthetic Speech Detection}
+    \renewcommand{\headrulewidth}{0.4pt}
+    \fancyfoot[L]{Department of Computer Applications,MACE}
+    \fancyfoot[R]{\thepage}
+    \renewcommand{\footrulewidth}{0.4pt}
+}
+
+% -------------------- CHAPTER TITLE FORMAT --------------------
+\usepackage{setspace}
+\onehalfspacing % Global 1.5 line spacing
+
+\usepackage{titlesec}
+
+\titleformat{\chapter}[block]
+  {\normalfont\fontsize{16pt}{18pt}\bfseries\raggedright}
+  {\thechapter.~}{0.5em}{}
+\titlespacing*{\chapter}{0pt}{-30pt}{15pt}
+
+% The * after \titlespacing is crucial—it enforces exact spacing
+\titleformat{\section}
+  {\normalfont\fontsize{14pt}{16pt}\bfseries}
+  {\thesection}{0.5em}{}
+\titlespacing* {\section}{0pt}{12pt}{4pt} 
+
+\titleformat{\subsection}
+  {\normalfont\fontsize{12pt}{14pt}\bfseries}
+  {\thesubsection}{0.4em}{}
+\titlespacing* {\subsection}{0pt}{10pt}{3pt}
+
+% Reset paragraph spacing to 0 so it doesn't add to the title spacing
+\setlength{\parskip}{4pt}
+\setlength{\parsep}{4pt}
+
+\setlength{\headheight}{14.5pt}
+\addtolength{\topmargin}{-2.5pt}
+
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+% Define clean styling for the Python code block
+\lstset{
+    language=Python,
+    breaklines=true,                 % Enables automatic line wrapping
+    breakatwhitespace=false,         % Wraps exactly at the margin, even inside long words/comments
+    basicstyle=\ttfamily\small,      % Use a clean monospaced font
+           % Optional: adds nice comment colors
+    showstringspaces=false,          % Removes visible space indicators in strings
+    columns=fullflexible
+}
+\fancypagestyle{specialpages}{
+    \fancyhf{}
+    \fancyfoot[C]{\thepage} % Centered Roman numeral
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+}
+
+\fancypagestyle{noheaderfooter}{
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+}
+
+% Preliminary pages: no header or footer design,
+% only a centered page number at the bottom
+\fancypagestyle{prelimpages}{
+    \fancyhf{}
+    \fancyfoot[C]{\thepage}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+}
+
+% Completely blank page style for the Table of Contents
+\fancypagestyle{tocstyle}{
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+}
+\hypersetup{
+    colorlinks=true,
+    urlcolor=black,
+    citecolor=black,
+    linkcolor=black
+}
+% -------------------- DOCUMENT BEGIN --------------------
+\begin{document}
+
+% ================================================================
+% PRELIMINARY PAGES — ROMAN NUMBERING
+% ================================================================
+\pagenumbering{roman}
+\setcounter{page}{1}
+\pagestyle{prelimpages}
+
+% Make chapter-style pages use the preliminary page style
+\makeatletter
+\let\ps@plain\ps@prelimpages
+\makeatother
+
+% ================================================================
+% ACKNOWLEDGEMENT
+% ================================================================
+\clearpage
+\chapter*{}
+\thispagestyle{prelimpages}
+\addcontentsline{toc}{chapter}{Acknowledgement}
+
+\vspace*{-1.0cm}
+
+\begin{center}
+    {\fontsize{16pt}{20pt}\selectfont\bfseries Acknowledgement}
+\end{center}
+
+\vspace{0.6cm}
+
+
+\noindent
+I wish to acknowledge the guidance and support received during
+the preparation and completion of this mini project.
+
+\noindent
+I express my gratitude to Almighty God for His blessings
+throughout the period of this work.
+
+\noindent
+I take this opportunity to acknowledge Dr.Sonia Abraham,
+Head of the Department of Computer Applications, Mar Athanasius
+College of Engineering, Kothamangalam, for her encouragement
+and for providing the necessary academic support to undertake
+this project.
+
+\noindent
+I am particularly grateful to Prof.Minu Maria Joseph, my
+Project Guide and Project Coordinator, for her guidance and
+supervision throughout the development of this project. Her
+suggestions and feedback were valuable in refining the work
+and addressing the challenges encountered during its
+implementation. Her continued support helped maintain the
+direction and progress of the project.
+
+\noindent
+I also acknowledge Dr.Manu John, Project Coordinator, for
+the assistance and coordination provided during the project.
+
+\noindent
+I extend my appreciation to all the faculty members of the
+Department of Computer Applications for their academic support,
+encouragement, and assistance throughout the course of my studies
+and during the completion of this project.
+
+\noindent
+Finally, I acknowledge all those who have contributed, directly
+or indirectly, to the completion of this mini project.
+
+
+\clearpage
+
+% ================================================================
+% ABSTRACT — PAGE ii
+% ================================================================
+% ================================================================
+% ABSTRACT
+% ================================================================
+\clearpage
+\chapter*{}
+\thispagestyle{prelimpages}
+\addcontentsline{toc}{chapter}{Abstract}
+\vspace*{-1.0cm}
+\begin{center}
+    {\fontsize{16pt}{20pt}\selectfont\bfseries Abstract}
+\end{center}
+
+\vspace{0.6cm}
+
+\noindent
+Voice cloning technology has advanced considerably, raising concerns about the authenticity of speech and the potential misuse of synthetically generated audio. Modern speech synthesis techniques can produce audio that closely resembles genuine human speech, making it increasingly difficult to distinguish authentic recordings from artificially generated speech through listening alone. Consequently, reliable synthetic speech detection has become an important research problem, particularly in applications involving voice-based authentication, digital communication, and audio content verification. This project investigates synthetic speech detection through spectral feature engineering and traditional machine learning techniques, with an emphasis on identifying acoustic characteristics that help distinguish bona fide speech from synthetic speech.
+
+\vspace{0.3cm}
+
+\noindent
+The ASVspoof 2019 Logical Access dataset is used to develop and evaluate a 128-dimensional acoustic feature representation. The extracted features include Mel-Frequency Cepstral Coefficients (MFCCs), their delta and delta-delta coefficients, and statistical measures of Root Mean Square (RMS) energy, Zero-Crossing Rate (ZCR), spectral centroid, and spectral rolloff. These features represent complementary properties of speech, including its spectral envelope, temporal variations, signal energy, and frequency distribution. Statistical measures provide a compact representation of variations within audio signals, enabling the extracted acoustic information to be used as numerical input for machine learning classifiers. The resulting feature vectors are preprocessed and used to train Support Vector Machine (SVM), Random Forest, and XGBoost classifiers. Their performance is comparatively evaluated using classification metrics and Equal Error Rate (EER) to assess their ability to distinguish bona fide speech from spoofed audio.
+
+\vspace{0.3cm}
+
+\noindent
+The project aims to examine the effectiveness of handcrafted acoustic features in detecting synthetic speech and to compare the performance of the selected classifiers under a common evaluation framework. By focusing on traditional machine learning approaches, the study also explores the extent to which carefully engineered acoustic representations can support reliable classification without directly relying on complex end-to-end deep learning architectures. The comparative analysis is intended to provide insights into the strengths and limitations of the selected models and the usefulness of spectral feature engineering for audio spoofing detection. 
+
+\clearpage
+% Paste your abstract here.
+
+\clearpage
+
+% ================================================================
+% COMMON FORMATTING FOR LISTS AND CONTENTS
+% ================================================================
+
+\setlength{\cftaftertoctitleskip}{1em}
+\setlength{\cftafterlottitleskip}{2em}
+\setlength{\cftafterloftitleskip}{1em}
+
+% Table of Contents line spacing
+\setlength{\cftbeforechapskip}{.8em}
+\setlength{\cftbeforesecskip}{2pt}
+\setlength{\cftbeforesubsecskip}{1pt}
+
+% LIST OF TABLES TITLE — ALL CAPS
+\renewcommand{\cftlottitlefont}
+    {\hfill\fontsize{18pt}{20pt}\bfseries\selectfont}
+\renewcommand{\cftafterlottitle}{\hfill}
+
+% LIST OF FIGURES TITLE — ALL CAPS
+\renewcommand{\cftloftitlefont}
+    {\hfill\fontsize{18pt}{20pt}\bfseries\selectfont}
+\renewcommand{\cftafterloftitle}{\hfill}
+
+% TABLE OF CONTENTS TITLE — ALL CAPS
+\renewcommand{\cfttoctitlefont}
+    {\hfill\fontsize{18pt}{20pt}\bfseries\selectfont}
+\renewcommand{\cftaftertoctitle}{\hfill}
+
+% ================================================================
+% LIST OF TABLES — ROMAN NUMBERING
+% ================================================================
+\clearpage
+\addcontentsline{toc}{chapter}{List of Tables}
+
+\vspace*{-2.5cm}
+\listoftables
+\thispagestyle{prelimpages}
+
+\clearpage
+
+% ================================================================
+% LIST OF FIGURES — ROMAN NUMBERING
+% ================================================================
+\addcontentsline{toc}{chapter}{List of Figures}
+
+\vspace*{-3cm}
+\listoffigures
+\thispagestyle{prelimpages}
+
+\clearpage
+
+% ================================================================
+% TABLE OF CONTENTS — NO HEADER OR FOOTER OR PAGE NUMBER
+% ================================================================
+\pagestyle{tocstyle}
+
+\makeatletter
+\let\ps@plain\ps@tocstyle
+\makeatother
+
+\vspace*{-2.5cm}
+\tableofcontents
+\thispagestyle{tocstyle}
+
+\clearpage
+
+% ================================================================
+% MAIN MATTER — ARABIC NUMBERING STARTS AT 1
+% ================================================================
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\pagestyle{frontmatter}
+
+% Restore your normal chapter page style
+\makeatletter
+\let\ps@plain\ps@frontmatter
+\makeatother
+
+% ================================================================
+% CHAPTER 1: INTRODUCTION
+% ================================================================
+\chapter{Introduction}
+
+
+Rapid advancements in neural speech synthesis and voice cloning technologies have enabled the generation of exceptionally realistic synthetic voices, creating substantial security and privacy risks through audio spoofing, unauthorized impersonation, and deepfake generation. Mitigating these threats requires robust and reliable automated detection systems capable of verifying audio authenticity in real-world environments. 
+
+However, traditional deep learning models, while often achieving high classification accuracy, impose heavy computational and memory demands that frequently restrict their viability for deployment in resource-constrained or real-time operational scenarios. Consequently, developing lightweight, computationally efficient classification frameworks remains a critical objective in the domain of audio security.
+
+To address these computational challenges, the project investigates a specialized, spectral-based detection pipeline designed to identify synthetic speech by targeting specific acoustic artifacts and anomalies inherently introduced by generation algorithms. Rather than relying solely on black-box deep neural networks, the proposed approach focuses on rigorous feature engineering using the ASVspoof Logical Access dataset. 
+
+The feature extraction process systematically captures fundamental frequency dynamics and spectral distributions by computing Mel-Frequency Cepstral Coefficients, along with their first and second-order temporal derivatives. These representations are further supplemented by global acoustic descriptors, including spectral centroid, spectral rolloff, zero-crossing rate, and root-mean-square energy, which collectively characterize the structural differences between genuine human speech and synthesized audio.
+
+These engineered features are subsequently evaluated across multiple classical supervised learning algorithms, specifically Support Vector Machines, Random Forest, and XGBoost, to systematically determine the optimal model configuration for this classification task. 
+
+Ultimately, this work establishes a comprehensive methodology that couples targeted spectral feature engineering with classical machine learning, providing a reliable, transparent, and computationally efficient approach for distinguishing between bonafide and synthetic speech.
+
+
+
+\chapter{Supporting Literature}
+
+\section{Literature Review }
+
+\textbf{Paper 1} – M. Usama Tanveer Gujjar, K. Munir, M. Amjad, A. U. Rehman and A. Bermak, \textit{Unmasking the Fake: Machine Learning Approach for Deepfake Voice Detection}, in IEEE Access, vol. 12, pp. 197442‑197453, 2024
+
+This paper addresses the challenge of detecting deepfake voices, which are artificially generated audio samples capable of closely imitating human speech. The authors emphasize the risks posed by such synthetic voices, including impersonation, fraud, and misinformation, and propose a novel detection framework named MFCC‑GNB XtractNet.  
+
+The dataset used in the study is a publicly available deepfake voice dataset, organized into real and fake classes. To ensure balanced training, the authors applied SMOTE‑based resampling, which generated synthetic minority samples and improved the distribution of data. Preprocessing steps included cleaning, normalization, and segmentation of audio into one‑second windows, ensuring consistency and reliability of extracted features.  
+
+The methodology begins with the extraction of Mel‑Frequency Cepstral Coefficients (MFCCs), a widely used representation in speech processing that captures spectral features aligned with human auditory perception. To enhance these features, Gaussian Naive Bayes (GNB) was applied to create probabilistic transformations, followed by Non‑Negative Matrix Factorization (NMF) to refine the feature space. This two‑tiered transformation process forms the MFCC‑GNB XtractNet approach.  
+
+The algorithms tested include Random Forest, K‑Nearest Neighbors, Logistic Regression, and Gaussian Naive Bayes. Performance was evaluated using k‑fold cross‑validation to ensure robustness. Among these, the proposed MFCC‑GNB XtractNet achieved the highest accuracy of 99.93\%, significantly outperforming baseline models.  
+
+The results confirm that the model can predict deepfake voices with exceptional reliability. The advantage of this work lies in its integration of classical feature extraction with advanced transformation, achieving both high accuracy and computational efficiency. This makes the approach practical for real‑world applications in voice authentication and forensic analysis.  
+
+For future directions, the authors suggest expanding the dataset size, incorporating additional environmental variables, and exploring deep learning architectures to further improve detection. They also highlight the potential of integrating the system into real‑time applications, which would enhance adaptability and usability.  
+
+In conclusion, the paper presents a strong contribution to the field of audio forensics and security. By introducing MFCC‑GNB XtractNet, the authors demonstrate that combining MFCC features with probabilistic and factorization techniques can set a new benchmark in deepfake voice detection, offering both accuracy and efficiency for practical deployment.  
+
+\renewcommand{\arraystretch}{1.5}
+
+\begin{longtable}{|p{4cm}|p{11cm}|}
+\hline
+
+TITLE &
+Unmasking the Fake: Machine Learning Approach for Deepfake Voice Detection \\ \hline
+
+AREA OF WORK &
+The study focuses on detecting deepfake voice recordings generated using artificial intelligence. It addresses threats such as impersonation, fraud, and misinformation, with applications in voice authentication, audio forensics, and speech security. \\ \hline
+
+DATASET &
+A publicly available dataset containing genuine and manipulated speech recordings was used. SMOTE was applied to balance the classes. Audio preprocessing included cleaning, normalization, and segmentation into one-second windows for consistent feature extraction. \\ \hline
+
+METHODOLOGY &
+The MFCC-GNB XtractNet framework extracts Mel-Frequency Cepstral Coefficients (MFCCs) from speech signals. Gaussian Naive Bayes (GNB) performs probabilistic feature transformation, while Non-Negative Matrix Factorization (NMF) refines the feature space before classification. \\ \hline
+
+ALGORITHMS &
+Random Forest (RF), K-Nearest Neighbors (KNN), Logistic Regression (LR), and Gaussian Naive Bayes (GNB) were evaluated using k-fold cross-validation to compare classification performance. \\ \hline
+
+RESULT &
+The proposed MFCC-GNB XtractNet achieved an accuracy of 99.93\%, outperforming all baseline models and providing reliable discrimination between genuine and deepfake speech samples. \\ \hline
+
+ADVANTAGE &
+The framework combines MFCC feature extraction with probabilistic transformation and matrix factorization to produce a compact feature representation. It provides high detection accuracy with low computational cost, making it suitable for forensic and voice authentication applications. \\ \hline
+
+FUTURE PROPOSAL &
+Future work includes expanding the dataset, incorporating additional acoustic variations, exploring deep learning models, and implementing the framework for real-time deepfake voice detection. \\ \hline
+
+\caption[Summary of paper 1]{Summary of paper 1.}
+\label{tab:paper_summary}
+
+\end{longtable}
+
+% Paper 2
+
+\textbf{Paper 2} – R. Bohara and A. K. Bairwa, \textit{Detecting Deepfake Audio Using Spectrogram-Based Machine Learning Approaches}, in IEEE Access, vol. 13, pp. 149478‑149489, 2025
+
+This paper investigates the problem of detecting deepfake audio, which has become a serious threat to privacy, security, and trust in digital communication. The authors propose a spectrogram‑based machine learning framework that focuses on lightweight and interpretable models for distinguishing real and synthetic speech.
+
+The dataset used in this study is the DEEP‑VOICE dataset, which contains recordings of eight public figures along with their synthetic versions generated using Retrieval‑based Voice Conversion (RVC). The dataset provides high‑quality, realistic samples that closely mimic natural speech, making it a challenging benchmark for detection. Although limited in speaker diversity, the dataset is well suited for binary classification tasks and aligns with current deepfake generation techniques.
+
+The methodology involves converting audio samples into mel‑spectrograms to capture time‑frequency information. These spectrograms serve as the input features for classification. The authors employ ensemble learning methods, specifically Random Forest, Gradient Boosting, and XGBoost, to analyze the extracted features. This approach allows the models to capture subtle artifacts in synthetic speech that are often missed by traditional waveform analysis.
+
+Among the algorithms tested, XGBoost achieved the best performance, with an accuracy of 99.32\%. Random Forest and Gradient Boosting also performed well, but XGBoost consistently outperformed them across evaluation metrics such as precision, recall, and F1‑score. The results demonstrate that spectrogram‑based ensemble learning can provide highly reliable predictions for deepfake audio detection.
+
+The advantage of this work lies in its balance between accuracy and interpretability. Unlike heavy deep learning models, the proposed framework is computationally efficient and easier to deploy in real‑world scenarios. It also highlights the importance of using spectrogram features, which capture frequency‑domain cues more effectively than raw audio signals.
+
+For future proposals, the authors suggest expanding datasets to include more speakers and diverse speech patterns, as well as testing resilience against newer synthesis methods. They also emphasize the need for real‑time detection systems that can handle large‑scale applications in cybersecurity, media authentication, and voice‑based verification.
+
+In conclusion, this paper makes a significant contribution by showing that spectrogram‑based ensemble learning methods can achieve state‑of‑the‑art accuracy in detecting deepfake audio. The study provides a practical and efficient solution that can be extended to safeguard voice authentication systems and digital forensics against evolving synthetic speech attacks.
+\clearpage
+\renewcommand{\arraystretch}{1.5}
+
+\begin{longtable}{|p{4cm}|p{11cm}|}
+\hline
+
+TITLE &
+Detecting Deepfake Audio Using Spectrogram-Based Machine Learning Approaches \\ \hline
+
+AREA OF WORK &
+The study focuses on detecting deepfake audio using spectrogram-based machine learning techniques. It addresses security and privacy concerns arising from synthetic speech, with applications in cybersecurity, media authentication, digital forensics, and voice verification. \\ \hline
+
+DATASET &
+The DEEP-VOICE dataset was used, containing recordings of eight public figures and their synthetic counterparts generated using Retrieval-based Voice Conversion (RVC). The dataset provides realistic speech samples suitable for binary classification of genuine and deepfake audio. \\ \hline
+
+METHODOLOGY &
+Audio recordings were converted into mel-spectrograms to capture time-frequency information. These spectrograms were used as input features for machine learning models, enabling the detection of subtle spectral artifacts present in synthetic speech. \\ \hline
+
+ALGORITHMS &
+Random Forest (RF), Gradient Boosting (GB), and Extreme Gradient Boosting (XGBoost) were evaluated to classify genuine and synthetic speech using spectrogram features. \\ \hline
+
+RESULT &
+XGBoost achieved the highest classification accuracy of 99.32\%, outperforming Random Forest and Gradient Boosting. It also produced superior precision, recall, and F1-score, demonstrating reliable deepfake audio detection. \\ \hline
+
+ADVANTAGE &
+The proposed framework combines high detection accuracy with computational efficiency and model interpretability. Spectrogram-based features effectively capture frequency-domain artifacts, making the approach practical for deployment in real-world security applications. \\ \hline
+
+FUTURE PROPOSAL &
+Future work includes expanding the dataset with more speakers and diverse speech patterns, evaluating robustness against advanced synthesis techniques, and developing real-time deepfake detection systems for large-scale applications. \\ \hline
+
+\caption[Summary of paper 2]{Summary of paper 2.}
+\label{tab:paper2_summary}
+
+\end{longtable}
+
+% Paper 3
+
+\textbf{Paper 3} – A. Hamza, A. R. R. Javed, F. Iqbal, N. Kryvinska, A. S. Almadhor, Z. Jalil, and R. Borghol, \textit{Deepfake Audio Detection via MFCC Features Using Machine Learning}, IEEE Access, vol. 10, pp. 134018‑134028, 2022
+
+This paper explores the detection of deepfake audio using Mel‑Frequency Cepstral Coefficients (MFCCs) as the primary feature set combined with machine learning algorithms. The authors emphasize the growing misuse of synthetic audio in fraudulent activities and propose a framework that leverages MFCCs to improve classification accuracy.
+
+The dataset employed is the Fake‑or‑Real (FoR) dataset, which is a recent benchmark created using text‑to‑speech models. It is divided into four sub‑datasets: for‑rerec, for‑2‑sec, for‑norm, and for‑original, each varying in audio length and bit rate. The dataset contains over 195,000 samples of both real and synthetic speech, making it comprehensive for training and evaluation. Preprocessing steps included duplicate removal, normalization, and standardization of bit rates to ensure consistency.
+
+The methodology centers on extracting MFCC features along with additional spectral and energy‑based features. Principal Component Analysis (PCA) was applied to reduce dimensionality, retaining 65 key features that captured 97\% of the variance. These features were then used to train multiple machine learning models, including Random Forest, Decision Tree, Support Vector Machine (SVM), Multi‑Layer Perceptron (MLP), and Extreme Gradient Boosting (XGB).
+
+The experimental results show that the SVM model achieved the highest accuracy of 98.83\% on the for‑rerec dataset, outperforming other classical models. Random Forest also performed strongly with 96.60\% accuracy, while Gradient Boosting and XGB achieved around 93\%. On the for‑original dataset, however, the deep learning model VGG‑16 produced superior results, highlighting the potential of combining MFCC features with deep architectures.
+
+The advantage of this work lies in its systematic comparison of classical machine learning and deep learning approaches on a large and diverse dataset. The study demonstrates that MFCC features remain highly effective for audio classification tasks, while deep learning models can further enhance performance on raw, unprocessed datasets.
+
+For future proposals, the authors suggest expanding the dataset to include more diverse speakers and languages, improving robustness against noisy audio, and exploring transfer learning to handle unseen synthesis techniques. They also highlight the importance of developing real‑time detection systems to make these models practical for deployment in cybersecurity and forensic applications.
+
+In conclusion, this paper provides a valuable contribution by showing that MFCC‑based machine learning models, particularly SVM, can achieve high accuracy in detecting deepfake audio. At the same time, deep learning models like VGG‑16 demonstrate promise for handling complex datasets. 
+
+\renewcommand{\arraystretch}{1.5}
+
+\begin{longtable}{|p{4cm}|p{11cm}|}
+\hline
+TITLE &
+Deepfake Audio Detection via MFCC Features Using Machine Learning \\ \hline
+
+AREA OF WORK &
+The study focuses on detecting deepfake audio using Mel-Frequency Cepstral Coefficients (MFCCs) and machine learning techniques. It addresses the increasing misuse of synthetic speech in fraud, impersonation, and cybersecurity. \\ \hline
+
+DATASET &
+The Fake-or-Real (FoR) dataset was used, consisting of over 195,000 real and synthetic speech samples.   \\ \hline
+
+METHODOLOGY &
+MFCC features were extracted along with spectral and energy-based features. Principal Component Analysis (PCA) was applied for dimensionality reduction, retaining 65 features that preserved 97\% of the data variance. \\ \hline
+
+ALGORITHMS &
+Random Forest (RF), Decision Tree (DT), Support Vector Machine (SVM), Multi-Layer Perceptron (MLP), and Extreme Gradient Boosting (XGB) were evaluated. The study also compared their performance with the VGG-16 deep learning model. \\ \hline
+
+RESULT &
+The SVM classifier achieved the highest accuracy of 98.83\% on the for-rerec dataset, while Random Forest achieved 96.60\%. Gradient Boosting and XGB achieved accuracies around 93\%. On the for-original dataset, the VGG-16 model outperformed the classical machine learning approaches. \\ \hline
+
+ADVANTAGE &
+The framework provides a comprehensive comparison between classical machine learning and deep learning techniques using a large benchmark dataset. The results demonstrate that MFCC-based features remain highly effective, while deep learning models offer improved performance for complex and unprocessed audio data. \\ \hline
+
+FUTURE PROPOSAL &
+Future work includes expanding the dataset with more speakers and languages, improving robustness against noisy audio, exploring transfer learning for unseen synthesis methods. \\ \hline
+
+\caption[Summary of paper 3]{Summary of paper 3.}
+\label{tab:paper3_summary}
+
+\end{longtable}
+
+\section{Literature Review Summary}
+
+
+\renewcommand{\arraystretch}{1.4}
+\setlength{\tabcolsep}{10pt}
+
+\begin{longtable}{|p{5cm}|p{9cm}|}
+
+\hline
+TITLE & SUMMARY\\ \hline
+\endfirsthead
+
+\hline
+TITLE / CITATION & SUMMARY OF CONTRIBUTION \\ \hline
+\endhead
+
+M. Usama Tanveer Gujjar, K. Munir, M. Amjad, A. U. Rehman, and A. Bermak, \textit{Unmasking the Fake: Machine Learning Approach for Deepfake Voice Detection}, IEEE Access, Vol. 12, 2024.
+&
+This paper introduces the MFCC-GNB XtractNet framework for deepfake voice detection. A balanced dataset of genuine and fake audio samples was prepared using SMOTE. MFCC features were enhanced using Gaussian Naive Bayes and Non-Negative Matrix Factorization. Random Forest, KNN, Logistic Regression, and GNB were evaluated, with the proposed model achieving 99.93\% accuracy. The framework combines high detection accuracy with computational efficiency. \\ \hline
+
+R. Bohara and A. K. Bairwa, \textit{Detecting Deepfake Audio Using Spectrogram-Based Machine Learning Approaches}, IEEE Access, Vol. 13, 2025.
+&
+The study employs the DEEP-VOICE dataset containing genuine and synthetic speech generated using Retrieval-based Voice Conversion. Mel-spectrograms were used as input features for Random Forest, Gradient Boosting, and XGBoost classifiers. XGBoost achieved the highest accuracy of 99.32\%. The framework is computationally efficient and interpretable, while future work focuses on larger datasets, improved robustness, and real-time detection systems. \\ \hline
+
+A. Hamza, A. R. R. Javed, F. Iqbal, N. Kryvinska, A. S. Almadhor, Z. Jalil, and R. Borghol, \textit{Deepfake Audio Detection via MFCC Features Using Machine Learning}, IEEE Access, Vol. 10, 2022.
+&
+The Fake-or-Real dataset containing more than 195,000 real and synthetic speech samples was used. MFCC, spectral, and energy-based features were extracted and reduced using PCA before classification with Random Forest, Decision Tree, SVM, MLP, and XGBoost. SVM achieved 98.83\% accuracy on the for-rerec dataset, while VGG-16 performed best on the for-original dataset. The study compares classical machine learning and deep learning approaches, with future work targeting larger datasets, noisy environments, transfer learning, and real-time deployment. \\ \hline
+
+\caption[Summary of All Reviewed Papers]{Summary of All Reviewed Papers.}
+\label{tab:litreview}
+
+\end{longtable}
+
+\section{Findings and Proposals}
+
+In the study by Gujjar et al. (2024), the authors presented MFCC‑GNB XtractNet, a hybrid model that combined MFCC features with Gaussian Naive Bayes and Non‑Negative Matrix Factorization. Their results were impressive, reaching nearly perfect accuracy. What stands out is the strength of classical feature engineering when carefully refined. At the same time, the work leaned heavily on accuracy metrics, with less emphasis on how the features themselves contributed to the model’s decisions. This leaves room for approaches that not only perform well but also provide clarity on why predictions are made.
+
+The work of Bohara and Bairwa (2025) explored spectrogram‑based ensemble learning using Random Forest, Gradient Boosting, and XGBoost on the DEEP‑VOICE dataset. Their results showed that ensemble methods can be both lightweight and highly accurate, with XGBoost performing best. The study demonstrated the promise of interpretable machine learning compared to deep neural networks, but the dataset was limited in diversity, and the analysis did not go deeper into feature‑level explanations. This suggests that while ensemble models are powerful, they benefit from being paired with tools that can highlight the role of individual acoustic features.
+
+In Hamza et al. (2022), MFCC features were extracted from the Fake‑or‑Real dataset and tested across a range of machine learning and deep learning models. SVM achieved strong results on certain subsets, while VGG‑16 excelled on the original dataset. The study confirmed the effectiveness of MFCCs but also showed challenges with noisy audio and the absence of systematic feature importance analysis. The focus remained on performance scores, which limited the practical insights into how models could be trusted in sensitive applications like forensics or security.
+
+Drawing from these works, the present project builds a spectral feature engineering pipeline that combines MFCCs, their delta and delta‑delta variations, spectral centroid, rolloff, zero‑crossing rate, and RMS energy. The choice of algorithms was deliberate: SVM was included for its proven strength in high‑dimensional feature spaces, Random Forest for its robustness and ability to highlight feature importance, and XGBoost for its efficiency and track record in ensemble learning. To address the lack of interpretability seen in earlier studies, SHAP was selected as the explainability tool. SHAP provides clear, feature‑level insights across models, showing which spectral cues drive classification outcomes. This ensures the pipeline is not only accurate but also transparent and practical for deployment in real‑time or resource‑constrained environments, aligning with the goals outlined in the abstract.
+
+% ================================================================
+%  CHAPTER 4: WORK DONE / PROJECT DESCRIPTION
+% ================================================================
+\chapter{System Analysis}
+The project utilizes the ASVspoof 2019 Logical Access (LA) dataset (\url{https://www.kaggle.com/datasets/anishsarkar22/asvpoof-2019-dataset-la/data}), a standard benchmark designed to evaluate synthetic speech detection and countermeasures against text-to-speech (TTS) and voice conversion (VC) attacks. 
+
+The LA subset contains approximately 121,000 audio samples partitioned into training (~25,000 files), development (~25,000 files), and evaluation (~71,000 files) sets. Each directory is organized with a `wav/` folder for audio files and a `protocol/` metadata file detailing speaker IDs, system attack types, and ground-truth labels (bonafide or spoof). 
+
+A key characteristic of the dataset is its class imbalance, where spoofed samples significantly outnumber genuine recordings. Furthermore, attack distributions vary widely, with certain synthesis algorithms contributing thousands of samples while others provide only a few hundred. Addressing this imbalance requires careful preprocessing, feature engineering, or class weighting to prevent model bias and ensure robust generalization against unseen spoofing techniques..
+
+\section{Analysis of Dataset}
+\subsection{About the dataset}
+
+\textbf{a) Overview}
+\newline
+The ASVspoof 2019 Logical Access (LA) subset is a benchmark for synthetic speech detection against text-to-speech (TTS) and voice conversion (VC) attacks. The dataset comprises approximately 121,000 audio samples partitioned into training, development, and evaluation sets. Metadata files specify speaker IDs, attack system IDs, and binary labels.
+
+\begin{itemize}[itemsep=2pt, topsep=2pt]
+    \item Total samples: 121,000 audio files
+    \item Train set: 25,000 files
+    \item Development set: 25,000 files
+    \item Evaluation set: 71,000 files
+    \item Labels: Bonafide (genuine) and Spoof (synthetic)
+    \item Metadata: Protocol files with filename, speaker ID, system ID, attack type, and label
+\end{itemize}
+
+\textbf{b) Features }
+\newline
+From the audio recordings, several acoustic features can be extracted to capture both spectral and temporal properties of speech. These features highlight subtle differences between genuine and synthetic speech, such as unnatural frequency distributions, irregular transitions, or energy inconsistencies.
+
+\begin{itemize}[itemsep=2pt, topsep=2pt]
+    \item Mel-Frequency Cepstral Coefficients (MFCCs)
+    \item Delta and Delta-Delta variations of MFCCs
+    \item Spectral Centroid
+    \item Spectral Rolloff
+    \item Zero-Crossing Rate
+    \item Root-Mean-Square (RMS) Energy
+\end{itemize}
+
+Together, the dataset’s scale, structured partitions, and diverse spoofing techniques provide a strong foundation for building and evaluating machine learning pipelines for synthetic speech detection.
+
+{c) Dataset Summary}
+
+The protocol files were loaded and merged using Python to create a unified metadata table. 
+The following figures illustrate the code used and the resulting sample records.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.7\textwidth]{diagrams/img1.png}
+    \caption{Python code for loading and merging protocol files}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.7\textwidth]{diagrams/protocol.png}
+    \caption{Sample records from the merged protocol metadata}
+\end{figure}
+
+\subsection{Explore the Dataset}
+
+Exploratory Data Analysis (EDA) was performed to understand the dataset characteristics, identify imbalances, and visualize important distributions. The purpose of this step is to gain insights into the dataset before feature extraction and model building.
+
+\textbf{a) Dataset Split Distribution}
+\newline
+This analysis shows how the samples are divided across training, development, and evaluation sets. The goal is to verify the relative sizes of each split and ensure that the evaluation set is sufficiently large for robust testing.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{diagrams/img2.png}
+    \caption{Number of samples in each dataset split}
+\end{figure}
+
+\textbf{b) Class Distribution}
+\newline
+This plot highlights the imbalance between bonafide and spoof samples. The purpose is to identify whether class balancing techniques may be required during training.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{diagrams/img3.png}
+    \caption{Class distribution of bonafide vs. spoof samples}
+\end{figure}
+
+\textbf{c) Attack Type Distribution}
+\newline
+This visualization shows how spoof samples are spread across different attack categories (A01–A19). The purpose is to understand diversity in spoofing methods and check for sparsity in certain attack types.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{diagrams/img4.png}
+    \caption{Distribution of spoof attack types}
+\end{figure}
+
+\textbf{d) Audio Duration Analysis}
+\newline
+The following plots analyze the duration of audio files. The histogram shows the overall distribution, while the boxplot highlights variability and outliers. The purpose is to confirm whether duration differences could affect feature extraction and model performance.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{diagrams/img5.png}
+    \caption{Distribution of audio durations}
+\end{figure}
+
+
+\textbf{e) Waveform and Spectrogram Analysis}
+\newline
+Waveform and spectrogram plots provide visual insights into the acoustic characteristics of bonafide and spoof speech. The purpose is to observe differences in amplitude variation and frequency content between genuine and synthetic signals.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{diagrams/img7.png}
+    \caption{Waveform of bonafide speech}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{diagrams/img9.png}
+    \caption{Waveform of spoof speech}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{diagrams/img10.png}
+    \caption{Mel spectrogram of bonafide speech}
+\end{figure}
+
+\textbf{f) Feature Behavior Analysis}
+\newline
+Feature plots such as RMS energy and Zero Crossing Rate (ZCR) comparisons highlight statistical differences between bonafide and spoof signals. The purpose is to identify discriminative features that can be leveraged in classification models.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{diagrams/img11.png}
+    \caption{RMS energy comparison between bonafide and spoof speech}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{diagrams/img12.png}
+    \caption{Zero Crossing Rate comparison between bonafide and spoof speech}
+\end{figure}
+
+\section{Data Preprocessing}
+
+\subsection{Data Cleaning}
+
+Data cleaning ensures that the ASVspoof LA 2019 dataset is reliable for analysis. Integrity checks confirmed that no corrupted or unreadable audio files were present and that all metadata entries matched the corresponding audio samples. Exploratory checks also verified that sampling rates were consistent at 16 kHz across the train, development, and evaluation subsets. Since the dataset is already well curated, no additional silence trimming or noise reduction was required. Outlier inspection was performed to identify unusual durations or extreme values in extracted features, but these were retained as they represent genuine variability in speech rather than errors. Overall, the dataset required minimal cleaning, as it is distributed in a standardized format specifically designed for benchmarking spoof detection systems.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{diagrams/img14.png}
+    \caption{Feature statistics summary for extracted features after cleaning}
+\end{figure}
+
+\subsection{Analysis of Feature Variables}
+
+The analysis of feature variables was conducted to understand the statistical properties and discriminative power of the extracted acoustic features. Descriptive statistics were computed for all 128 features, and variance analysis indicated that no near-zero variance features were present. Correlation analysis confirmed that no highly correlated feature pairs existed, ensuring that all features contribute useful information without redundancy. Outlier analysis using boxplots revealed the presence of some outliers, particularly in spectral features. These outliers were not dominant and were retained, as they represent valid speech variations rather than errors. Visualizations such as histograms and boxplots highlighted differences between bonafide and spoofed samples, validating the relevance of the chosen features and guiding preprocessing decisions such as scaling and normalization.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{diagrams/img15.png}
+    \caption{Boxplots of selected features showing outliers in spectral variables}
+\end{figure}
+
+Since the extracted features are measured on very different scales, feature scaling was required. StandardScaler was applied to standardize all features to zero mean and unit variance. Before-and-after scaling plots confirmed that distributions were normalized, ensuring fair contribution of all features during model training.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{diagrams/img16.png}
+    \caption{Feature distributions before scaling}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{diagrams/img17.png}
+    \caption{Feature distributions after scaling}
+\end{figure}
+
+\subsection{Analysis of Class Variable}
+
+The class variable represents the target outcome of the classification task, distinguishing between bonafide and spoofed audio. An exploratory analysis of class distribution revealed a significant imbalance, with approximately 90\% of the dataset consisting of spoof samples and only 10\% representing bonafide speech. This imbalance poses challenges for model training, as classifiers may become biased toward the majority class. To address this, evaluation metrics such as F1-score and Equal Error Rate (EER) were selected, as they provide a fairer assessment under imbalanced conditions.  
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{diagrams/img3.png}
+    \caption{Class distribution showing imbalance between bonafide and spoof samples}
+\end{figure}
+
+\section{Data Visualization} 
+Data visualization was carried out to examine the dataset structure and feature characteristics prior to model training. 
+The goal was to verify dataset balance, explore audio properties, and highlight discriminative cues between bonafide and spoof speech. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{diagrams/img13.png}
+    \caption{Feature correlation heatmap}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{diagrams/img11.png}
+    \caption{RMS energy comparison}
+\end{figure}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{diagrams/img6.png}
+    \caption{Box Plot for Audio duration distribution}
+\end{figure}
+
+
+Spoof samples tend to differ in duration, RMS energy, and zero crossing rate, 
+indicating measurable acoustic distinctions. Correlation analysis shows redundancy among certain features, while boxplots reveal 
+outliers that may influence classification. These observations guided preprocessing and model selection.
+
+
+\section{Analysis of Algorithm}
+
+\subsection{Detailed Study report of the proposed algorithm}
+
+\textbf{Random Forest} \\
+Random Forest is an ensemble learning method that constructs multiple decision trees and aggregates their predictions. 
+It reduces overfitting by averaging across diverse trees and can capture complex non-linear relationships between features. 
+It is particularly effective for tabular feature sets like the 128-dimensional audio vectors and provides feature importance measures that aid interpretability.
+
+\textbf{Strengths:}  
+Robust against overfitting, effective in modeling non-linear feature interactions, interpretable through feature importance ranking, 
+and efficient compared to deep learning models.
+
+\textbf{Justification:}  
+\begin{itemize}[itemsep=.2pt, topsep=1pt]
+    \item Gujjar et al. (2024) evaluated Random Forest on MFCC features for deepfake voice detection, showing strong baseline performance and efficiency in training.
+    \item Bohara and Bairwa (2025) applied Random Forest to spectrogram-based features, achieving competitive accuracy and highlighting its interpretability for forensic applications.
+    \item Hamza et al. (2022) included Random Forest in their comparative study on the Fake-or-Real dataset, confirming its reliability as a classical ML approach for audio deepfake detection.
+\end{itemize}
+
+\textbf{Process Flow:}  
+\begin{itemize}[itemsep=.2pt, topsep=1pt]
+    \item Data Input: Extracted audio features (MFCCs, spectral, temporal) are standardized and prepared for training.
+    \item Bootstrap Sampling: Multiple random subsets of the training dataset are generated to ensure diversity and reduce bias.
+    \item Tree Construction: Each decision tree is trained on its bootstrap sample, using random subsets of features at each split to increase variability.
+    \item Independent Predictions: Each tree outputs a classification (bonafide or spoof) independently.
+    \item Aggregation: Predictions from all trees are combined using majority voting to produce the final decision.
+    \item Feature Importance: Contributions of each feature are calculated by averaging split gains across all trees, providing interpretability.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{diagrams/img18.png}
+    \caption{Random Forest classification process}
+\end{figure}
+
+\textbf{Pseudocode:}  
+\begin{verbatim}
+Algorithm RandomForestClassifier
+Input: Training dataset D with features F and labels Y
+Output: Predicted class for new sample x
+
+1. For t = 1 to T (number of trees):
+      a. Draw bootstrap sample Dt from D
+      b. Train decision tree ht on Dt
+         - At each node, select random subset of features f ⊂ F
+         - Split node using best feature from f
+2. Aggregate predictions:
+      For new sample x:
+          Collect predictions h1(x), h2(x), ..., hT(x)
+          Final prediction = majority_vote(h1(x), h2(x), ..., hT(x))
+3. Compute feature importance by averaging split gains across all trees
+\end{verbatim}
+
+\textbf{XGBoost} \\
+Extreme Gradient Boosting (XGBoost) is an optimized implementation of gradient boosting that builds decision trees sequentially, 
+where each new tree corrects the errors of the previous ones. It is designed for speed and performance, making it highly effective 
+for large-scale datasets. It is particularly powerful for tabular audio features such as MFCCs and spectrogram-derived statistics.
+
+\textbf{Strengths:}  
+High predictive accuracy, strong handling of complex feature interactions, efficient training with large datasets, 
+and flexibility through regularization and parameter tuning.
+
+\textbf{Justification:}  
+\begin{itemize}[itemsep=.2pt, topsep=1pt]
+    \item Hamza et al. (2022) found Gradient Boosting to perform best on the “for-norm” subset of the Fake-or-Real dataset, demonstrating adaptability to different audio conditions.
+    \item Bohara and Bairwa (2025) showed that XGBoost achieved 99.32\% accuracy on the DEEP-VOICE dataset, outperforming Random Forest and Gradient Boosting, proving its effectiveness for spectrogram-based detection.
+    \item Gujjar et al. (2024) included boosting methods in their comparative study, noting strong performance but higher computational cost compared to simpler models.
+\end{itemize}
+
+\textbf{Process Flow:}  
+\begin{itemize}[itemsep=.2pt, topsep=1pt]
+    \item Data Input: Extracted audio features (MFCCs, spectrogram coefficients) are standardized and prepared.
+    \item Initialization: A base learner (weak tree) is trained to make initial predictions.
+    \item Error Calculation: Residual errors between predicted and actual labels are computed.
+    \item Sequential Tree Building: New trees are trained to minimize residual errors, with each iteration improving prediction accuracy.
+    \item Regularization: Shrinkage and L1/L2 penalties are applied to prevent overfitting.
+    \item Final Prediction: Outputs from all trees are combined (weighted sum) to produce the final classification.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{diagrams/img19.png}
+    \caption{XGBoost classification process.}
+\end{figure}
+
+\textbf{Pseudocode:}  
+\begin{verbatim}
+Algorithm XGBoostClassifier
+Input: Training dataset D with features F and labels Y
+Output: Predicted class for new sample x
+1. Initialize model with base prediction (e.g., mean of Y)
+2. For t = 1 to T (number of boosting rounds):
+      a. Compute residuals rt = Y - Ŷ(t-1)
+      b. Train regression tree ht on residuals rt
+      c. Update model:
+         Ŷ(t) = Ŷ(t-1) + η * ht(x)
+         where η is the learning rate
+      d. Apply regularization to control complexity
+3. Final prediction = sign(Σ η * ht(x))
+\end{verbatim}
+
+\textbf{Support Vector Machine (SVM)} \\
+Support Vector Machine constructs optimal hyperplanes to separate classes in a high-dimensional space. 
+With kernel functions, it can handle non-linear decision boundaries and is highly effective for audio features such as MFCCs, 
+where subtle spectral differences must be captured. 
+
+\textbf{Strengths:}  
+Effective in high-dimensional feature spaces, strong generalization ability, robust performance with relatively small datasets, 
+and capable of achieving high accuracy when features are carefully extracted.
+
+\textbf{Justification:}  
+\begin{itemize}[itemsep=.2pt, topsep=1pt]
+    \item Hamza et al. (2022) reported that SVM achieved 98.83\% accuracy on the Fake-or-Real dataset, outperforming other ML models in detecting deepfake audio.
+    \item Gujjar et al. (2024) highlighted SVM’s strong performance on MFCC features compared to other classical models, reinforcing its suitability for spoof detection tasks.
+    \item Bohara and Bairwa (2025) noted that SVM, when combined with MFCCs, provided high accuracy but was sensitive to noisy audio, showing both its potential and limitations.
+\end{itemize}
+
+\textbf{Process Flow:}  
+\begin{itemize}[itemsep=.2pt, topsep=1pt]
+    \item Data Input: Extracted audio features (MFCCs, spectral features) are standardized.
+    \item Kernel Selection: Choose an appropriate kernel (linear, polynomial, RBF) to map features into higher-dimensional space.
+    \item Hyperplane Construction: Identify the optimal separating hyperplane that maximizes the margin between bonafide and spoof classes.
+    \item Support Vectors: Determine critical data points that define the decision boundary.
+    \item Classification: New samples are classified based on their position relative to the hyperplane.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.55\textwidth]{diagrams/img20.png}
+    \caption{SVM classification process.}
+\end{figure}
+
+\textbf{Pseudocode:}  
+\begin{verbatim} 
+Algorithm SVMClassifier
+Input: Training dataset D with features F and labels Y
+Output: Predicted class for new sample x
+1. Select kernel function K (linear, polynomial, RBF)
+2. Solve optimization problem:
+      Minimize ||w||^2 
+      Subject to yi(w·xi + b) ≥ 1 for all i
+3. Identify support vectors that lie closest to the hyperplane
+4. Construct decision function:
+      f(x) = sign(Σ αi * yi * K(xi, x) + b)
+5. For new sample x:
+      Compute f(x)
+      Assign class based on sign(f(x))
+\end{verbatim}
+
+\textbf{SHapley Additive exPlanations (SHAP)} \\
+SHAP is a game-theoretic approach to explain the output of machine learning models. It allocates credit to each feature for a specific prediction by computing optimal Shapley values, providing a unified and theoretically grounded measure of feature importance.
+
+\textbf{Strengths:}
+
+Solid theoretical foundation rooted in cooperative game theory (satisfying efficiency, symmetry, dummy, and additivity axioms), consistent and locally accurate feature attribution, capable of explaining both global model behavior and individual local predictions, and model-agnostic versatility across diverse architectures.
+
+\textbf{Justification:}
+
+\begin{itemize}[itemsep=.2pt, topsep=1pt]
+\item Unlike LIME, which relies on local linear approximations that can be unstable and highly sensitive to perturbation window sizes, SHAP provides unique local accuracy and consistency guarantees based on exact or approximated Shapley values.
+\item It satisfies the missingness and consistency axioms, ensuring that features with no impact receive zero attribution and that if a model changes to rely more heavily on a feature, its attribution value never decreases.
+\item Its robust theoretical backing prevents inconsistent feature rankings, making it a more reliable choice than heuristic-based explainability methods for high-stakes audio spoof detection classification tasks.
+\end{itemize}
+
+\textbf{Process Flow:}
+
+\begin{itemize}[itemsep=.2pt, topsep=1pt]
+\item Background Dataset Setup: Define a representative background dataset or summary baseline to establish expected model output values.
+\item Coalition Generation: Formulate feature subsets (coalitions) to evaluate marginal contributions across different combinations of extracted audio features.
+\item Shapley Value Calculation: Compute weighted averages of marginal contributions for each feature across all possible feature permutations.
+\item Attribution Aggregation: Output local additive feature importance values that sum up to the difference between the model's prediction and the expected baseline.
+\item Interpretability Visualization: Aggregate individual local explanations to generate global summary plots, feature dependence plots, and decision force plots.
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{diagrams/image.png}
+\caption{SHAP feature attribution and explanation workflow.}
+\end{figure}
+
+
+
+\textbf{Pseudocode:}  
+
+\begin{lstlisting}[mathescape=true]
+Algorithm SHAPExplainer
+Input: Trained model $f$, target instance $x$, background dataset $D$
+Output: Shapley values vector $\phi$
+
+1. Compute expected model output $E[f(x)]$ over background dataset $D$
+2. For each feature $i$ in instance $x$:
+   Initialize weighted marginal contribution sum = 0
+   For each feature subset $S$ (excluding $i$):
+       Compute marginal contribution: $f(S \cup \{i\}) - f(S)$
+       Apply combinatorial weighting coefficient based on subset size
+3. Average weighted contributions to determine feature attribution $\phi_i$
+4. Verify local accuracy axiom: $\sum_i \phi_i + E[f(x)] = f(x)$
+5. Return feature attribution vector $\phi$
+\end{lstlisting}
+
+
+\section{Project Pipeline}
+
+\subsection{Project Pipeline Diagram with Explanation}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\textwidth]{Pastel Audio Classification Workflow Infographic.png}
+    \caption{Project Workflow}
+\end{figure}
+
+Project Pipeline Explanation
+The project pipeline begins with the ASVspoof Logical Access dataset, which contains both bonafide and spoofed audio samples. The dataset is partitioned into training, development, and evaluation subsets to ensure proper model learning, hyperparameter tuning, and unbiased testing. Before model training, exploratory data analysis is performed to understand the dataset characteristics. Visualizations of class distribution, audio duration, and feature statistics help identify imbalances, outliers, and discriminative cues between genuine and synthetic speech. 
+
+Data preprocessing and feature extraction follow, where raw audio is processed to extract Mel-Frequency Cepstral Coefficients along with their temporal derivatives to capture spectral envelopes and vocal tract characteristics. Complementary statistics like spectral centroid, spectral rolloff, zero-crossing rate, and RMS energy are also incorporated. These lightweight, interpretable features are scaled using a Standard Scaler, and target labels are encoded to ensure numerical stability. 
+
+To address the inherent class imbalance in the ASVspoof dataset where spoof samples significantly outnumber bonafide samples, instead of generating synthetic data like SMOTE, which can distort natural acoustic distributions, class weighting and computed scale weights are applied during training to penalize misclassifications of the minority bonafide class.
+
+The extracted features and adjusted configurations are then used to train classical machine learning models, including Random Forest, Support Vector Machine, and XGBoost. Each model is evaluated on the development set using standard metrics such as Accuracy, Precision, Recall, F1-score to measure generalization performance, alongside computational training and prediction times.
+
+Finally, the system performs ASVspoof Evaluation on the unseen evaluation set, utilizing specialized biometric security metrics including Equal Error Rate. Following the evaluation phase, an interpretability layer is applied specifically to the best performing model to analyze decisions globally and locally.
+
+
+\section{Feasibility Analysis}
+
+The feasibility analysis evaluates whether the proposed synthetic speech detection system can be realistically implemented and sustained. It considers technical, economic, and operational aspects to ensure that the project is practical, cost-effective, and user-friendly. 
+
+\textbf{Technical Feasibility}
+
+The technical feasibility of this project is underpinned by established frameworks and standard methodologies in synthetic speech detection. The ASVspoof Logical Access dataset provides a rigorous benchmark, offering a clearly partitioned structure (train, dev, eval) that ensures methodological consistency and unbiased evaluation. Exploratory Data Analysis (EDA) establishes a quantitative basis for subsequent preprocessing steps. The feature extraction pipeline using standard libraries like Librosa and NumPy for MFCCs, spectral descriptors, and temporal metrics is computationally efficient and optimized for audio signal processing. 
+
+Furthermore, the selected classification algorithms (Support Vector Machines, Random Forest, and XGBoost) are well-supported within mature ecosystems like scikit-learn, ensuring robust implementation and reliable convergence. Finally, the incorporation of comprehensive model explanation methods introduces crucial post-hoc interpretability, mitigating the opaque nature of machine learning classifiers by quantifying feature attribution and decision pathways. Given the accessibility of the dataset, libraries, and computational resources, the project objectives are entirely viable.
+
+\textbf{Economic Feasibility}
+
+From an economic standpoint, the project incurs negligible capital expenditure by using established open-source tools and publicly accessible benchmarks. The ASVspoof corpus is available without licensing fees, while the underlying technology stack encompassing Librosa, NumPy, Pandas, scikit-learn, and XGBoostrelies entirely on open-source distributions. Development and iterative testing can be sustained using standard cloud-hosted computational environments like Google Colab, precluding the need for dedicated hardware acquisition.
+
+Operationally, the resource footprint remains exceptionally low. Unlike heavy deep-learning architectures that demand high-end GPU clusters for inference and maintenance, the classical machine learning pipelines implemented here operate efficiently on modest hardware configurations. This drastically reduces ongoing infrastructure and deployment overhead. Furthermore, the modularity of the architecture ensures that scaling or updating feature sets requires minimal engineering hours rather than wholesale code rewrites. 
+
+\textbf{Operational Feasibility}
+
+Operational feasibility is secured through a lightweight, modular architecture engineered for seamless deployment and workflow integration. By decoupling data ingestion, feature extraction, and classification, the pipeline achieves high extensibility, allowing new audio features or dataset variations to be incorporated incrementally without disrupting existing system components. 
+
+To satisfy the requirements of forensic and security environments, the system prioritizes interpretability by providing clear visibility into decision pathways, ensuring that stakeholders can audit and validate classification outcomes.  
+
+
+
+%=========================================================
+% SYSTEM ENVIRONMENT
+%=========================================================
+
+
+\section{System Environment}
+
+The system environment defines the software tools, libraries, frameworks, and hardware resources used in the development of the synthetic speech detection system. The project involves several stages, including audio data preparation, acoustic feature extraction, preprocessing, machine learning model development, performance evaluation, explainability, and web application integration. Each stage requires an appropriate set of tools to ensure that the processing pipeline operates consistently.
+
+The environment is organized into two major components: the software environment and the hardware environment. The software environment describes the programming language, data processing libraries, machine learning frameworks, visualization tools, development platforms, and web technologies used in the project. The hardware environment describes the computational resources, audio input facilities, and network connectivity required to support development and application execution.
+
+%=========================================================
+% SOFTWARE ENVIRONMENT
+%=========================================================
+
+\subsection{Software Environment}
+
+The software environment provides the tools required to implement the complete detection workflow, from processing an input audio signal to generating a classification result. Python serves as the primary language for data processing and model development, while the frontend and backend technologies support the integration of the trained model into a web application.
+
+\subsubsection{Programming Language}
+
+\textbf{Python}
+
+Python is the primary programming language used for the implementation of the synthetic speech detection pipeline. Its extensive scientific computing and machine learning ecosystem makes it suitable for audio analysis, feature engineering, model training, evaluation, and explainability.
+
+Python is used to load audio samples, extract the 128-dimensional acoustic feature vector, prepare numerical data, and train the Random Forest, XGBoost, and Support Vector Machine (SVM) classifiers. It also supports the calculation of evaluation metrics and the generation of feature-contribution explanations using SHAP.
+
+Python is additionally used in the backend to connect the audio processing pipeline with the trained model. This allows an uploaded audio sample to pass through feature extraction and preprocessing before a prediction is generated. The use of a common programming language across these stages simplifies integration and reduces inconsistencies between model development and application inference.
+
+%=========================================================
+% AUDIO PROCESSING AND DATA PREPARATION
+%=========================================================
+
+\subsubsection{Audio Processing and Data Preparation}
+
+Audio processing and data preparation form the initial stages of the detection workflow. Audio signals must be converted into numerical representations before they can be supplied to conventional machine learning classifiers. The following libraries support this process.
+
+\begin{table}[H]
+\centering
+\small
+\renewcommand{\arraystretch}{1.35}
+
+\begin{tabularx}{\textwidth}{
+    >{\raggedright\arraybackslash}p{0.23\textwidth}
+    >{\raggedright\arraybackslash}X
+}
+\toprule
+\textbf{Tool} & \textbf{Role in the Project} \\
+\midrule
+
+Librosa &
+Loads audio samples, performs audio-related preprocessing, and extracts acoustic features such as MFCCs, delta and delta-delta coefficients, RMS energy, Zero-Crossing Rate, spectral centroid, and spectral rolloff. \\
+
+NumPy &
+Performs numerical operations on audio signals and feature arrays, including statistical calculations used to construct the feature vector. \\
+
+Pandas &
+Organizes metadata and extracted features in tabular form. It supports data inspection, dataset organization, and analysis of sample-level information. \\
+
+\bottomrule
+\end{tabularx}
+
+\caption{Audio Processing and Data Preparation Tools}
+\label{tab:audio-processing-tools}
+\end{table}
+
+The extracted acoustic characteristics are represented as numerical values and organized into a fixed-length feature vector. Statistical summaries of cepstral and spectral features help represent important characteristics of the audio signal without requiring the classifiers to process raw waveform data directly.
+
+NumPy supports the numerical calculations involved in feature construction, while Pandas provides a convenient structure for organizing the extracted data and associated metadata. Librosa provides the audio analysis functions required to derive the selected acoustic representations.
+
+%=========================================================
+% MACHINE LEARNING
+%=========================================================
+
+\subsubsection{Machine Learning and Model Development}
+
+The machine learning environment supports model training, preprocessing, prediction, and performance comparison. Three conventional classifiers are considered in this project: Random Forest, XGBoost, and Support Vector Machine. These models provide different classification approaches and allow their performance to be compared using a common evaluation procedure.
+
+Scikit-learn provides utilities for preparing the feature data and assessing classifier performance. Feature scaling is particularly relevant to SVM because the magnitude of input features can influence the model's decision boundary. The same fitted preprocessing transformation must be applied during deployment to maintain consistency with the training pipeline.
+
+Random Forest, XGBoost, and SVM are evaluated using classification metrics such as accuracy, precision, recall, and macro F1-score. Confusion matrices are also used to examine class-wise prediction behaviour, while Equal Error Rate (EER) provides an additional measure of detection performance.
+\begin{table}[H]
+\centering
+\small
+\renewcommand{\arraystretch}{1.35}
+
+\begin{tabularx}{\textwidth}{
+    >{\raggedright\arraybackslash}p{0.28\textwidth}
+    >{\raggedright\arraybackslash}X
+}
+\toprule
+\textbf{Tool or Model} & \textbf{Role in the Project} \\
+\midrule
+
+Scikit-learn &
+Provides preprocessing utilities, feature scaling, SVM implementation, model evaluation functions, and supporting machine learning utilities. \\
+
+Random Forest &
+Uses an ensemble of decision trees to classify audio samples as bonafide or spoof. It provides a tree-based baseline for comparison with the other classifiers. \\
+
+XGBoost &
+Implements gradient-boosted decision trees and serves as one of the principal classification models evaluated in the project. \\
+
+Support Vector Machine (SVM) &
+Uses an RBF kernel to learn a decision boundary for distinguishing bonafide speech from spoofed speech using the extracted feature vectors. \\
+
+Joblib &
+Supports serialization and loading of trained model objects and compatible preprocessing components for reuse during inference. \\
+
+\bottomrule
+\end{tabularx}
+
+\caption{Machine Learning Tools and Models}
+\label{tab:ml-environment}
+\end{table}
+
+
+Joblib is used to preserve trained objects so that the application can load the selected model and its required preprocessing components without repeating the entire training procedure whenever a prediction is requested.
+
+%=========================================================
+% DATA VISUALIZATION
+%=========================================================
+
+\subsubsection{Data Visualization and Evaluation}
+
+Data visualization tools are used to inspect the dataset, understand feature distributions, and present evaluation results. Visual analysis complements numerical metrics by making patterns, class differences, and possible sources of classification errors easier to examine.
+
+\begin{table}[H]
+\centering
+\small
+\renewcommand{\arraystretch}{1.35}
+
+\begin{tabularx}{\textwidth}{
+    >{\raggedright\arraybackslash}p{0.25\textwidth}
+    >{\raggedright\arraybackslash}X
+}
+\toprule
+\textbf{Tool} & \textbf{Application} \\
+\midrule
+
+Matplotlib &
+Generates plots for exploratory data analysis, model evaluation, and the presentation of experimental results. \\
+
+Seaborn &
+Supports statistical visualizations, including feature-distribution plots, correlation heatmaps, and other graphical summaries of the data. \\
+
+\bottomrule
+\end{tabularx}
+
+\caption{Data Visualization Tools}
+\label{tab:visualization-tools}
+\end{table}
+
+Visualization is useful during both data analysis and model evaluation. Feature distributions can help reveal differences between groups of audio samples, while correlation plots can indicate relationships among numerical features. Confusion matrices provide a visual summary of correct and incorrect classifications for the bonafide and spoof classes.
+
+These tools support the interpretation of experimental results; the actual conclusions are drawn from the observed plots and calculated evaluation metrics rather than from visualization alone.
+
+%=========================================================
+% MODEL EXPLAINABILITY
+%=========================================================
+
+\subsubsection{Explainable Artificial Intelligence}
+
+\textbf{SHAP (SHapley Additive exPlanations)}
+
+SHAP is used to explain individual model predictions by estimating the contribution of input features to the model output. It is incorporated into the application to provide additional information about the acoustic characteristics influencing a classification.
+
+The explanation component operates on the extracted feature representation rather than directly explaining the raw audio waveform. Feature contributions can help indicate which aspects of the acoustic representation support the predicted class and which contribute in the opposite direction. These explanations improve the interpretability of the application's output, but they do not guarantee that a prediction is correct or establish that a particular feature causes a spoofing artefact.
+
+%=========================================================
+% WEB APPLICATION TECHNOLOGIES
+%=========================================================
+
+\subsubsection{Web Application Technologies}
+
+The web application connects the trained classification model with an interface through which users can submit audio and view the resulting prediction. The frontend handles user interaction, while the backend coordinates audio processing, feature extraction, model inference, and the return of prediction information.
+
+When a user submits an audio sample, the frontend sends the input to the Flask backend for processing. The backend extracts the required acoustic features, verifies the feature-vector dimensions, applies the saved preprocessing transformation, and passes the prepared data to the trained classifier. The resulting prediction and associated explanation information are then returned for presentation in the interface.
+
+This separation between frontend and backend keeps user interaction distinct from the model's processing logic. It also allows the trained model to be reused without embedding the complete machine learning pipeline in the browser.
+
+\begin{table}[H]
+\centering
+\small
+\renewcommand{\arraystretch}{1.35}
+
+\begin{tabularx}{\textwidth}{
+    >{\raggedright\arraybackslash}p{0.23\textwidth}
+    >{\raggedright\arraybackslash}X
+}
+\toprule
+\textbf{Technology} & \textbf{Role in the Project} \\
+\midrule
+
+HTML &
+Defines the structure of the web interface, including the audio input area and sections used to display results. \\
+
+CSS &
+Controls the visual presentation, layout, spacing, and styling of the interface. \\
+
+JavaScript &
+Handles client-side interactions, submits audio to the backend, and updates interface elements with the returned results. \\
+
+Bootstrap &
+Provides responsive layout utilities and reusable interface components where required by the frontend. \\
+
+Flask &
+Implements the Python backend API and connects audio submission, feature extraction, preprocessing, model prediction, and explanation generation. \\
+
+\bottomrule
+\end{tabularx}
+
+\caption{Web Application Technologies}
+\label{tab:web-environment}
+\end{table}
+
+
+%=========================================================
+% DEVELOPMENT AND VERSION CONTROL
+%=========================================================
+
+\subsubsection{Development Platforms and Version Control}
+
+Development platforms support experimentation and implementation, while version control provides a traceable record of source code changes. These tools help organize the work across dataset analysis, model development, frontend implementation, and backend integration.
+
+\begin{table}[H]
+\centering
+\small
+\renewcommand{\arraystretch}{1.35}
+
+\begin{tabularx}{\textwidth}{
+    >{\raggedright\arraybackslash}p{0.25\textwidth}
+    >{\raggedright\arraybackslash}X
+}
+\toprule
+\textbf{Tool} & \textbf{Application} \\
+\midrule
+
+Kaggle Notebooks &
+Provides a cloud-based environment for dataset exploration, audio feature extraction, model development, and evaluation. \\
+
+Google Colab &
+Provides an additional cloud notebook environment for Python experimentation and computational tasks when required. \\
+
+Visual Studio Code &
+Serves as the local development environment for editing, organizing, debugging, and testing the application source code. \\
+
+Git &
+Tracks source code changes and records development milestones through commits. \\
+
+GitHub &
+Hosts the project repository and provides a centralized location for source code, project documentation, and version history. \\
+
+Web Browser &
+Provides access to the web application and supports testing of its interface and user interactions. \\
+
+\bottomrule
+\end{tabularx}
+
+\caption{Development and Version Control Tools}
+\label{tab:development-environment}
+\end{table}
+
+Cloud notebook platforms are useful for experimentation and model development, whereas Visual Studio Code supports local application development and integration. Git and GitHub help maintain a history of modifications and provide a centralized repository for the implementation.
+
+
+%=========================================================
+% HARDWARE ENVIRONMENT
+%=========================================================
+
+\subsection{Hardware Environment}
+
+The hardware environment provides the computational resources required for processing audio signals, generating feature vectors, training machine learning models, and running the web application. The actual computational demand depends on the dataset size, audio duration, model configuration, and number of samples processed.
+
+The project uses traditional machine learning classifiers, which can be executed on a CPU. Cloud notebook platforms may also provide access to additional computing resources for dataset processing and experimentation. The following table summarizes the principal hardware and supporting resource requirements.
+\subsubsection{Processor and Memory Requirements}
+
+The processor is responsible for executing the feature extraction routines and the numerical operations required by the trained classifiers. A multi-core CPU is suitable for general development and individual prediction requests. The time required for processing depends on the duration of the input audio, the implementation of the feature extraction functions, and the number of requests being handled.
+
+Main memory is required to hold audio signals, extracted features, intermediate data structures, and model objects during execution. A system with 8 GB RAM or more is a reasonable development target, although the required amount may vary. Processing large portions of the ASVspoof 2019 dataset in memory may require additional resources or a more memory-efficient workflow.
+
+\subsubsection{Storage and Computational Acceleration}
+
+Storage is required for the source code, Python environment, audio data, extracted feature arrays, trained classifiers, preprocessing objects, and evaluation outputs. Sufficient free space should be maintained for temporary files and intermediate results generated during experimentation.
+
+A dedicated GPU is not a mandatory component of the current implementation because the selected Random Forest, XGBoost, and SVM models can operate on CPU resources. However, future experiments involving neural networks or transformer-based audio models may benefit from GPU acceleration, depending on the architecture and training workload.
+\begin{table}[H]
+\centering
+\small
+\renewcommand{\arraystretch}{1.4}
+
+\begin{tabularx}{\textwidth}{
+    >{\raggedright\arraybackslash}p{0.23\textwidth}
+    >{\raggedright\arraybackslash}p{0.25\textwidth}
+    >{\raggedright\arraybackslash}X
+}
+\toprule
+\textbf{Component} & \textbf{Suggested Requirement} & \textbf{Purpose} \\
+\midrule
+
+Processor &
+Multi-core CPU &
+Executes audio loading, feature extraction, preprocessing, model inference, and other general computations. \\
+
+Main Memory (RAM) &
+8 GB or more recommended &
+Supports data preparation, feature arrays, development tools, and local execution of the application. Actual needs vary with the workload. \\
+
+Secondary Storage &
+Adequate free storage &
+Stores source code, libraries, model files, extracted features, datasets, and experimental results. The complete dataset may require substantially more space than the application itself. \\
+
+Graphics Processing Unit (GPU) &
+Optional for the implemented models &
+A dedicated GPU is not essential for ordinary inference with the selected traditional classifiers. GPU resources may be useful for future deep learning experiments. \\
+
+Microphone &
+Built-in or external, if recording is supported &
+Captures speech when the application is used with a microphone-based input workflow. It is not required when users submit existing audio files only. \\
+
+Internet Connectivity &
+Stable internet connection &
+Supports access to cloud notebooks, dataset resources, software dependencies, and the GitHub repository. It is also required for remote access to online resources. \\
+
+Audio Input Device or Files &
+Digital audio input &
+Provides the speech samples required for analysis, either through supported audio files or a microphone when recording functionality is available. \\
+
+\bottomrule
+\end{tabularx}
+
+\caption{Hardware and Supporting Resource Requirements}
+\label{tab:hardware-environment}
+\end{table}
+
+
+\subsubsection{Audio Input and Network Connectivity}
+
+The system requires digital audio samples as input to perform synthetic speech detection. Audio may be provided through uploaded files or through a microphone if the application supports direct recording. The input audio must be available in a supported format and must be readable by the audio-processing libraries used in the implementation. Common audio formats, such as WAV, may be used depending on the application's file-loading capabilities. The quality and characteristics of the input signal can influence the extracted acoustic features and, consequently, the classification result.
+
+Before feature extraction, the audio signal must be processed in a manner consistent with the preprocessing procedure used during model development. This includes handling the sampling rate, converting the signal into the required numerical representation, and ensuring that the audio can be processed by the feature extraction pipeline. The system extracts acoustic characteristics such as Mel-Frequency Cepstral Coefficients (MFCCs), delta and delta-delta coefficients, Root Mean Square (RMS) energy, Zero-Crossing Rate (ZCR), spectral centroid, and spectral rolloff. Statistical measures are subsequently used to construct the 128-dimensional feature vector expected by the trained classifiers. Maintaining consistency between training-time and prediction-time preprocessing is essential for reliable classification.
+
+Network connectivity supports access to online development environments, software documentation, dataset resources, package repositories, and version-controlled project files. Cloud notebook services can provide additional computational resources when local hardware is insufficient for large-scale experiments. An internet connection may also be required to install dependencies, retrieve datasets, update source code repositories, and access remotely hosted application services. However, continuous internet connectivity is not inherently required for every prediction. If the application and trained model operate entirely on the local machine, inference can be performed offline, provided that all required software components and model files are available locally. If the application relies on a remote server, network connectivity is necessary to transmit requests and receive classification results.
+
+The software environment consists of programming languages, libraries, machine learning frameworks, and development tools that support the complete synthetic speech detection workflow. Python serves as the primary programming language for implementing audio processing, feature extraction, model training, evaluation, and prediction. Librosa supports audio loading and acoustic feature extraction, while NumPy and Pandas support numerical computations and dataset manipulation. Scikit-learn provides utilities for data preprocessing, feature scaling, classification, and performance evaluation. Random Forest, XGBoost, and Support Vector Machine (SVM) are used to develop and compare the classification models. SHAP can be used to interpret model predictions by estimating the contribution of input features to the output, where compatible model explainers are available.
+
+
+
+
+
+\chapter{System Design}
+ 
+\section{Model(s) Building}
+The model-building stage converts the standardised 128-dimensional feature vectors into trained classifiers for bonafide-versus-spoof detection. Three classical algorithms were built, tuned and compared: Random Forest, XGBoost and Support Vector Machine (RBF kernel). The work was organised as four Kaggle notebooks, one per stage of the pipeline (Table~\ref{tab:notebooks}).
+ 
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{p{4.2cm}p{5.6cm}p{4.6cm}}
+\toprule
+\textbf{Notebook} & \textbf{Purpose} & \textbf{Main outputs}\\
+\midrule
+01 -- EDA and Feature Extraction & Load protocols, explore data, extract features with Librosa & \texttt{X\_train/dev/eval.npy}, \texttt{y\_train/dev/eval.npy}\\
+02 -- Data Preparation & Integrity checks, variance and correlation analysis, label encoding, scaling & \texttt{X\_train/dev/eval\_prepared.npy}, \texttt{standard\_scaler.pkl}, \texttt{label\_encoder.pkl}\\
+03 -- Model Training & Baselines, imbalance handling, hyperparameter tuning & \texttt{best\_rf.pkl}, \texttt{best\_xgb.pkl}, \texttt{best\_svm.pkl}\\
+04 -- Final Selection and Evaluation & Threshold analysis, evaluation-set testing, feature ablation, attack-wise analysis & Final metrics\\
+\bottomrule
+\end{tabular}
+\caption{Notebook organisation of the project}
+\label{tab:notebooks}
+\end{table}
+ 
+\subsection{Implementation Code}
+ 
+\paragraph{(a) Feature extraction.}\mbox{}\\Each recording is loaded at 16~kHz. Twenty MFCCs are computed together with their first-order (delta) and second-order (delta-delta) derivatives, plus RMS energy, zero-crossing rate, spectral centroid and spectral rolloff. Because each descriptor is a sequence over time frames, the mean and standard deviation over frames are used to obtain a fixed-length vector. These statistical features summarize both the overall acoustic characteristics and their temporal variations. The resulting feature vector is then used as input to the machine learning classifiers for distinguishing genuine speech from synthetic speech.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/fext.png}
+\caption{Librosa-Based Audio Feature Extraction}
+\label{fig:thr}
+\end{figure}
+ 
+The resulting 128 features are laid out as shown in Table~\ref{tab:featuregroups}.
+ 
+\begin{table}[H]
+\centering
+\begin{tabular}{lcc}
+\toprule
+\textbf{Feature group} & \textbf{Index range} & \textbf{Count}\\
+\midrule
+MFCC (20 mean + 20 std) & 0--39 & 40\\
+Delta MFCC & 40--79 & 40\\
+Delta-Delta MFCC & 80--119 & 40\\
+RMS energy (mean, std) & 120--121 & 2\\
+Zero-crossing rate & 122--123 & 2\\
+Spectral centroid & 124--125 & 2\\
+Spectral rolloff & 126--127 & 2\\
+\midrule
+\textbf{Total} & & \textbf{128}\\
+\bottomrule
+\end{tabular}
+\caption{Layout of the 128-dimensional feature vector}
+\label{tab:featuregroups}
+\end{table}
+ 
+\paragraph{(b) Data preparation.}\mbox{}\\ The labels are encoded (bonafide : 0, spoof : 1). The scaler and label encoder are fitted on the training set only and then applied to the development and evaluation sets, so no information leaks from the held-out data.
+
+ \begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/scaler.png}
+\caption{Data Preprocessing Using Label Encoding and Standard Scaling}
+\label{fig:thr}
+\end{figure}
+
+ 
+Before scaling, the data were checked for missing values, infinite values and duplicates (none were found in any split), for near-zero variance (variance below $10^{-5}$: no features) and for highly correlated features ($|r|>0.95$: no pairs). No feature was therefore removed.
+ 
+\paragraph{(c) Handling class imbalance.}\mbox{}\\  The training set contains 2,580 bonafide and 22,800 spoof samples (about 10.2\% versus 89.8\%, a ratio of roughly 8.84:1). Instead of synthetic oversampling such as SMOTE, which can distort natural acoustic distributions, algorithm-level weighting was used.
+ 
+\begin{lstlisting}
+n_bonafide, n_spoof = 2580, 22800
+scale_pos_weight = n_bonafide / n_spoof     # = 0.1132 (spoof is the positive class)
+ 
+Random Forest : class_weight = "balanced" / "balanced_subsample"
+SVM           : class_weight = "balanced" (searched as an option)
+XGBoost       : scale_pos_weight searched around 0.1132
+\end{lstlisting}
+ 
+\paragraph{(d) Model definitions and hyperparameter tuning.}\mbox{}\\  Each classifier was first trained as a baseline and then tuned with \texttt{RandomizedSearchCV} (15 candidate configurations, 3-fold stratified cross-validation, macro-F1 scoring, \texttt{random\_state=42}).
+ 
+\begin{lstlisting}
+
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.svm import SVC
+from xgboost import XGBClassifier
+from sklearn.model_selection import RandomizedSearchCV, StratifiedKFold
+cv = StratifiedKFold(n_splits=3, shuffle=True, random_state=42)
+
+# Baseline Models
+rf_model = RandomForestClassifier(
+    n_estimators=200,
+    class_weight="balanced",
+    random_state=42,
+    n_jobs=-1
+)
+xgb_model = XGBClassifier(
+    objective="binary:logistic",
+    eval_metric="logloss",
+    n_estimators=200,
+    learning_rate=0.1,
+    max_depth=6,
+    random_state=42,
+    n_jobs=-1
+)
+svm_model = SVC(
+    kernel="rbf",
+    probability=True,
+    random_state=42
+)
+# Search Spaces
+rf_space = {
+    "n_estimators": [200, 300, 500],
+    "max_depth": [10, 20, 30, None],
+    "min_samples_split": [2, 5, 10],
+    "min_samples_leaf": [1, 2, 4],
+    "max_features": ["sqrt", "log2"],
+    "bootstrap": [True, False],
+    "class_weight": ["balanced", "balanced_subsample"]
+}
+xgb_space = {
+    "n_estimators": [100, 200, 300],
+    "learning_rate": [0.03, 0.05, 0.1],
+    "max_depth": [3, 4, 5, 6],
+    "min_child_weight": [1, 3, 5],
+    "gamma": [0, 0.1, 0.3, 0.5, 1],
+    "subsample": [0.8, 1.0],
+    "colsample_bytree": [0.8, 1.0],
+    "scale_pos_weight": [0.08, 0.1132, 0.15, 0.20]
+}
+svm_space = {
+    "C": [0.1, 1, 5, 10, 20, 50],
+    "gamma": ["scale", 0.1, 0.01, 0.001, 0.0001],
+    "kernel": ["rbf"],
+    "class_weight": [None, "balanced"]
+}
+# Randomized Hyperparameter Search
+rf_search = RandomizedSearchCV(
+    estimator=rf_model,
+    param_distributions=rf_space,
+    n_iter=15,
+    cv=cv,
+    scoring="f1_macro",
+    random_state=42,
+    n_jobs=-1
+)
+xgb_search = RandomizedSearchCV(
+    estimator=xgb_model,
+    param_distributions=xgb_space,
+    n_iter=15,
+    cv=cv,
+    scoring="f1_macro",
+    random_state=42,
+    n_jobs=-1
+)
+svm_search = RandomizedSearchCV(
+    estimator=svm_model,
+    param_distributions=svm_space,
+    n_iter=15,
+    cv=cv,
+    scoring="f1_macro",
+    random_state=42,
+    n_jobs=-1)
+    
+# Training
+rf_search.fit(X_train, y_train)
+xgb_search.fit(X_train, y_train)
+svm_search.fit(X_train, y_train)
+
+# Best models
+best_rf = rf_search.best_estimator_
+best_xgb = xgb_search.best_estimator_
+best_svm = svm_search.best_estimator_
+
+\end{lstlisting}
+ 
+The best configurations found are listed in Table~\ref{tab:besthp}.
+ 
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{lp{11.2cm}}
+\toprule
+\textbf{Model} & \textbf{Selected hyperparameters}\\
+\midrule
+Random Forest & \texttt{n\_estimators=200, max\_depth=20, min\_samples\_split=2, min\_samples\_leaf=4, max\_features="sqrt", bootstrap=False, class\_weight="balanced\_subsample"}\\
+XGBoost & \texttt{n\_estimators=300, learning\_rate=0.1, max\_depth=6, min\_child\_weight=5, gamma=0, subsample=0.8, colsample\_bytree=0.8, scale\_pos\_weight=0.15}\\
+SVM & \texttt{kernel="rbf", C=50, gamma=0.01, class\_weight="balanced"}\\
+\bottomrule
+\end{tabular}
+\caption{Selected hyperparameters after randomised search}
+\label{tab:besthp}
+\end{table}
+ 
+ 
+\paragraph{(e) Common evaluation function.}\mbox{}\\
+A single evaluation function was used for all models to ensure consistent assessment. It records training and prediction time and computes accuracy, class-wise precision, recall and F1-score for the bonafide and spoof classes, macro F1-score. Classification reports, confusion matrices were also generated for detailed performance analysis.
+
+\paragraph{(f) Equal Error Rate (EER).}\mbox{}\\
+For the ASVspoof-style evaluation, the Equal Error Rate (EER) is the operating point at which the false-positive rate (FPR) equals the false-negative rate (FNR). It represents the point on the ROC curve where the rate of falsely accepting spoofed speech and the rate of incorrectly rejecting bonafide speech are equal. A lower EER indicates better performance, as it means that the system makes fewer errors when the two types of classification errors are balanced. In this project, EER is used as an additional threshold-independent metric for evaluating the effectiveness of the spoof detection models.
+ 
+ \begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/err.png}
+\caption{Function to compute EER}
+\label{fig:thr}
+\end{figure}
+ 
+\subsection{Model Planning (Training / Testing Split of the Dataset)}
+The official ASVspoof~2019 LA partition is used unchanged. No random re-splitting was performed, because the official partition keeps speakers and attack algorithms separate across sets and allows comparison with published work (Table~\ref{tab:split}).
+ 
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{lrrrp{5cm}}
+\toprule
+\textbf{Split} & \textbf{Samples} & \textbf{Bonafide} & \textbf{Spoof} & \textbf{Role}\\
+\midrule
+Training & 25,380 & 2,580 & 22,800 & Fit models and scaler, hyperparameter search\\
+Development & 24,844 & 2,548 & 22,296 & Compare models and tune/select configuration\\
+Evaluation & 71,237 & 7,355 & 63,882 & Final unseen test\\
+\midrule
+\textbf{Total} & \textbf{121,461} & \textbf{12,483} & \textbf{108,978} & \\
+\bottomrule
+\end{tabular}
+\caption{Dataset partition and role of each split}
+\label{tab:split}
+\end{table}
+ 
+The class ratio is similar in all three sets (bonafide is about 10\%). However, the attack labels A07--A19 occur only in the evaluation protocol (training and development use A01--A06), which makes the evaluation set largely a test of generalisation to unseen attacks. 
+ 
+\subsection{Training}
+Each classifier was trained on the $25{,}380 \times 128$ training matrix. Hyperparameter tuning improved the two tree-based models substantially, mainly by raising the recall of the minority bonafide class (Table~\ref{tab:tuning}).
+ 
+\begin{table}[H]
+\centering
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Model} & \textbf{Accuracy} & \textbf{Bonafide recall} & \textbf{Macro F1} \\
+\midrule
+Random Forest -- baseline & 0.9228 & 0.2527 & 0.6802\\
+Random Forest -- tuned & 0.9448 & 0.5157 & 0.8136 \\
+XGBoost -- baseline & 0.9524 & 0.5455 & 0.8379 \\
+XGBoost -- tuned & 0.9657 & 0.7076 & 0.8950 \\
+SVM -- baseline & 0.9633 & 0.6554 & 0.8826 \\
+SVM -- tuned & 0.9623 & 0.6374 & 0.8779 \\
+\bottomrule
+\end{tabular}
+\caption{Effect of tuning on the development set}
+\label{tab:tuning}
+\end{table}
+
+ Since the spoof class dominates, a threshold of 0.50 gives low recall on the bonafide class. The threshold on $P(\text{spoof})$ was swept from 0.10 to 0.90 on the development set, and the value maximising macro F1 was chosen for each model (Random Forest 0.70, XGBoost 0.80, SVM 0.90). These values were frozen before scoring the evaluation set.
+
+
+\subsection{Testing}
+
+After model training and hyperparameter tuning, the final models were evaluated on the official ASVspoof 2019 LA evaluation set, which was kept completely separate from model training and development-stage tuning. The evaluation set contains 71,237 audio samples and includes attack types that are not present in the training and development sets, providing a measure of generalisation to unseen spoofing attacks. This separation helps assess whether the trained models can identify synthetic speech beyond the samples encountered during development.
+
+The trained models were applied to the evaluation features using the same preprocessing pipeline fitted on the training data. The development-set thresholds were frozen before evaluation to prevent information from the evaluation set from influencing model selection. The same feature extraction and scaling procedures were maintained to ensure consistency between development and evaluation. Each model generated predictions for the evaluation samples, which were compared with the corresponding ground-truth labels to determine classification performance.
+
+Performance was assessed using accuracy, precision, recall, F1-score, macro F1-score, and Equal Error Rate (EER). Accuracy measures the proportion of correctly classified samples, while precision and recall provide further insight into false-positive and false-negative classifications. The F1-score balances precision and recall, whereas macro F1-score gives equal importance to the performance of each class. EER provides an additional measure of the trade-off between false acceptance and false rejection at a particular decision threshold. Confusion matrices were also generated to examine the types of classification errors and identify potential differences in how genuine and spoofed speech were classified.
+
+In addition, attack-wise evaluation was performed to examine how the models behaved across different spoofing attack types. This analysis helps determine whether a model performs consistently across known and previously unseen attacks or struggles with particular synthesis and voice-conversion methods. The evaluation results were used to compare the generalisation capabilities of Random Forest, XGBoost, and Support Vector Machine (SVM). The resulting metrics and attack-wise observations provide a basis for identifying the strengths and limitations of each classifier in synthetic speech detection.
+
+% ==========================================================
+\chapter{Results and Discussion}
+
+\section{Evaluation Results}
+
+The trained Random Forest, XGBoost, and SVM models were evaluated on the official ASVspoof 2019 LA evaluation set. The evaluation set contains 71,237 recordings, including 7,355 bonafide and 63,882 spoofed recordings. The models were evaluated using the final configurations obtained during the training and development stages.
+
+The final evaluation results are presented using confusion matrices and classification reports. These outputs provide class-wise precision, recall, F1-score, overall accuracy, macro F1-score, and Equal Error Rate (EER).
+
+\subsection{Random Forest}
+
+The confusion matrix for the Random Forest model is shown in Figure~\ref{fig:rf_cm}. The model correctly classified 6,618 of the 7,355 bonafide recordings and 55,129 of the 63,882 spoof recordings. A total of 737 bonafide recordings were classified as spoof, while 8,753 spoof recordings were classified as bonafide.
+
+The corresponding classification report is shown in Figure~\ref{fig:rf_report}. The model achieved an accuracy of 86.68\% and a macro F1-score of 0.7516. The recall for bonafide speech was 89.98\%, while the recall for spoof speech was 86.30\%. The EER obtained by the model was 12.63\%.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/image.png}
+    \caption{Random Forest confusion matrix on the ASVspoof 2019 LA evaluation set.}
+    \label{fig:rf_cm}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.92\textwidth]{figures/rf_final_classification_report.png}
+    \caption{Random Forest classification report on the ASVspoof 2019 LA evaluation set.}
+    \label{fig:rf_report}
+\end{figure}
+
+
+\subsection{XGBoost}
+
+The confusion matrix for XGBoost is presented in Figure~\ref{fig:xgb_cm}. The model correctly classified 6,787 bonafide recordings and 54,957 spoof recordings. It classified 568 bonafide recordings as spoof and 8,925 spoof recordings as bonafide.
+
+As shown in the classification report in Figure~\ref{fig:xgb_report}, XGBoost achieved an accuracy of 86.67\% and a macro F1-score of 0.7545. The bonafide recall was 92.28\%, while the spoof recall was 86.03\%. The model obtained an EER of 11.51\%.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/xgb_final_confusion_matrix.png}
+    \caption{XGBoost confusion matrix on the ASVspoof 2019 LA evaluation set.}
+    \label{fig:xgb_cm}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.92\textwidth]{figures/xgb_final_classification_report.png}
+    \caption{XGBoost classification report on the ASVspoof 2019 LA evaluation set.}
+    \label{fig:xgb_report}
+\end{figure}
+
+
+\subsection{SVM}
+
+The SVM confusion matrix is shown in Figure~\ref{fig:svm_cm}. The model correctly classified 6,725 bonafide recordings and 55,110 spoof recordings. It classified 630 bonafide recordings as spoof and 8,772 spoof recordings as bonafide.
+
+The classification report in Figure~\ref{fig:svm_report} shows an overall accuracy of 86.80\% and a macro F1-score of 0.7550. The bonafide recall was 91.43\%, while the spoof recall was 86.27\%. The EER was 11.81\%.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/svm_final_confusion_matrix.png}
+    \caption{SVM confusion matrix on the ASVspoof 2019 LA evaluation set.}
+    \label{fig:svm_cm}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.92\textwidth]{figures/svm_final_classification_report.png}
+    \caption{SVM classification report on the ASVspoof 2019 LA evaluation set.}
+    \label{fig:svm_report}
+\end{figure}
+
+
+\section{Attack-wise Evaluation}
+
+To examine the behaviour of the models across different spoofing conditions, evaluation performance was also analysed separately for the individual attack groups. This analysis helps identify attack types that are classified reliably and those that remain challenging, providing additional insight beyond the overall evaluation metrics.
+
+The attack-wise results show substantial variation between spoofing attack types. The models achieve very high classification rates for most attack groups from A07 to A15, with several groups reaching values close to 100\%. A16 also shows relatively high classification rates for all three models, suggesting that the extracted acoustic features are effective for distinguishing these attacks from genuine speech.
+
+In contrast, A17, A18, and A19 are considerably more difficult to classify. For A17, the classification rates range from 14.0\% to 18.6\%. For A18, the values range from 52.2\% to 61.3\%, while A19 ranges from 47.0\% to 63.7\%. This variation indicates that the handcrafted spectral features do not provide equally discriminative information for all spoofing attack conditions. These findings highlight the importance of attack-wise evaluation in identifying weaknesses and assessing the generalisation capabilities of the models.
+
+\section{Discussion of Results}
+
+The evaluation results show that all three classical machine-learning models provide similar overall performance on the unseen evaluation set. Their accuracy values are between 86.67\% and 86.80\%, while their macro F1-scores range from 0.7516 to 0.7550. This relatively narrow range indicates that the three models produce comparable overall classification performance when applied to the evaluation data.
+
+The class-wise results provide additional information that is not captured by accuracy alone. XGBoost obtains a bonafide recall of 92.28\%, followed by SVM at 91.43\% and Random Forest at 89.98\%. The spoof recall values are 86.03\%, 86.27\%, and 86.30\% for XGBoost, SVM, and Random Forest, respectively. Thus, the models exhibit a different balance between the two classes even though their overall accuracy values are very close.
+
+The confusion matrices also illustrate the effect of the class imbalance in the evaluation set. The number of spoof recordings is substantially larger than the number of bonafide recordings. Consequently, overall accuracy alone does not fully describe the behaviour of the detector. The class-wise recall and macro F1-score provide a more balanced view of performance across the two classes.
+
+The EER values obtained by the three models are 12.63\% for Random Forest, 11.51\% for XGBoost, and 11.81\% for SVM. The relatively close EER values indicate that the models have similar separation capability on the evaluation data, with XGBoost producing the lowest measured EER among the three models.
+
+The attack-wise results reveal a more important limitation of the feature representation. While most attack groups are classified with very high accuracy, the performance decreases substantially for A17, A18, and A19. These attack-dependent differences suggest that the 128-dimensional handcrafted feature representation captures characteristics that are useful for several spoofing conditions but does not generalise equally well to every synthesis method.
+
+The difference between the strong results obtained for several attack groups and the substantially lower results for A17--A19 also demonstrates the difficulty of generalising synthetic-speech detection to unseen attack characteristics. This is particularly relevant for a detector based on handcrafted spectral and temporal descriptors, since different synthesis methods can introduce different acoustic artefacts.
+
+Overall, the experiments demonstrate that a compact 128-dimensional handcrafted feature representation combined with classical machine-learning models can provide meaningful performance for synthetic speech detection without requiring deep neural network architectures. At the same time, the attack-wise results indicate that further improvements in feature representation and generalisation would be required for more consistent performance across diverse and previously unseen spoofing conditions.
+
+
+%========================================================
+% CHAPTER 6: MODEL DEPLOYMENT
+%========================================================
+
+\chapter{Model Deployment}
+
+Model deployment makes a trained machine learning model accessible
+through an application so that users can submit audio recordings and
+obtain predictions. In this project, a web-based application was developed to demonstrate the practical use
+of the proposed synthetic speech detection system.
+
+The application integrates the trained XGBoost classifier with the
+audio feature extraction pipeline and a SHAP-based explainability
+component. Users can upload an audio recording, obtain a prediction
+of whether the speech is bonafide or spoofed, and inspect the
+acoustic feature contributions associated with the model output.
+
+The deployment stage focuses on integrating the trained model into
+a user-friendly interface. Model training and evaluation are
+performed separately, while the deployed application uses the
+saved model and preprocessing components to process submitted
+audio recordings.
+
+The application follows a frontend--backend architecture. The
+frontend provides the user interface, while the backend processes
+the uploaded audio, extracts acoustic features, applies the
+required preprocessing, and obtains the prediction from the
+trained model.
+
+The deployment workflow consists of the following stages:
+
+\begin{enumerate}
+    \item {Audio input:} The user selects an audio recording
+    through the SpoofSense interface.
+
+    \item {Input validation:} The backend checks whether
+    an audio file has been submitted.
+
+    \item {Temporary audio handling:} The submitted recording
+    is temporarily saved so that it can be processed by the
+    feature extraction pipeline.
+
+    \item {Feature extraction:} The audio is converted into
+    the 128-dimensional handcrafted feature representation used
+    during model development.
+
+    \item {Feature scaling:} The saved standard scaler
+    transforms the extracted features into the representation
+    expected by the trained classifier.
+
+    \item {Classification:} The trained XGBoost model
+    generates class probabilities used to determine the prediction.
+
+    \item {Explainability:} SHAP estimates feature
+    contributions for the model output. Related features are
+    grouped to make the explanation easier to interpret.
+
+    \item {Result presentation:} The application displays
+    the predicted class and its associated explanation.
+\end{enumerate}
+
+Figure~\ref{fig:deployment-homepage} shows the initial interface
+through which users can select an audio recording for analysis.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]
+    {figures/deployment_homepage.png}
+    \caption{ Homepage for synthetic speech detection
+    and audio input.}
+    \label{fig:deployment-homepage}
+\end{figure}
+
+The backend is implemented using the Flask web framework. It
+provides an API endpoint that receives audio files from the
+frontend and returns the prediction and associated explanation.
+Cross-Origin Resource Sharing (CORS) is configured to support
+communication between the frontend and backend when they are
+served from different origins.
+
+At application startup, the backend loads the trained XGBoost
+model, standard scaler, and label encoder from saved files.
+Loading these components once allows them to be reused when
+processing subsequent requests.
+
+The prediction endpoint accepts an audio file through an HTTP
+POST request. The backend first checks whether a file has been
+provided and whether a filename has been selected. The recording
+is then temporarily saved and passed to the feature extraction
+function.
+
+The extracted feature vector is checked to ensure that it
+contains 128 features. It is then reshaped into the format
+expected by the classifier and transformed using the saved
+standard scaler. The scaled feature vector is passed to the
+trained XGBoost model to obtain class probabilities.
+
+The backend subsequently prepares the prediction result and
+the SHAP-based explanation for presentation in the frontend.
+Temporary file handling supports processing without requiring
+the uploaded recording to be maintained as a permanent record
+by the prediction workflow.
+
+The deployed system uses the same handcrafted feature extraction
+approach used during model development. Each audio recording is
+represented by 128 numerical descriptors derived from the
+audio signal.
+
+The feature vector contains the mean and standard deviation
+of Mel-Frequency Cepstral Coefficients (MFCCs), delta MFCCs,
+and delta-delta MFCCs. It also includes root-mean-square (RMS)
+energy, zero-crossing rate (ZCR), spectral centroid, and
+spectral rolloff statistics.
+
+MFCCs describe the spectral characteristics of speech, while
+delta and delta-delta coefficients capture changes in these
+characteristics over time. The additional energy and spectral
+descriptors provide complementary information about the audio
+signal.
+
+Consistency between training and deployment is essential.
+The same feature definitions, ordering, and preprocessing
+steps must be used so that the trained model receives inputs
+in the expected format.
+
+The trained XGBoost classifier produces probabilities for the
+bonafide and spoof classes. These probabilities are used by
+the backend to determine the prediction displayed in the
+application.
+
+The deployed application uses a configured decision threshold
+of 0.78 for its spoof classification logic. This threshold
+belongs to the application's inference configuration and
+should be distinguished from any threshold used to generate
+the evaluation results reported in Chapter 5.
+
+The final prediction is displayed as either \textit{Bonafide}
+or \textit{Spoof}. The interface also presents a confidence
+value associated with the result. This value should be
+interpreted according to the probability calculation used
+by the application and does not guarantee that the prediction
+is correct.
+
+SHAP (SHapley Additive exPlanations) is integrated into the
+deployed application to provide insight into the model's
+predictions. It is used as a post-hoc explainability method:
+the trained classifier produces its output, and SHAP estimates
+how the input features contribute to the explained output.
+
+The implementation initializes the SHAP explainer using a
+background sample drawn from the prepared training features.
+For an incoming audio recording, SHAP values are calculated
+using the scaled feature vector supplied to the model.
+
+Rather than presenting all 128 features individually, the
+application groups them into meaningful acoustic categories:
+MFCC, MFCC Dynamics, Delta-Delta MFCC, Energy,
+Zero-Crossing Rate, Spectral Centroid, and Spectral Rolloff.
+
+For each group, the application calculates a signed contribution
+and an importance value based on the absolute SHAP contributions.
+The signed contribution indicates the direction of the group's
+overall contribution, while the importance value represents
+the magnitude of its contributions without considering direction.
+
+In the implemented explanation logic, positive contributions
+are interpreted as pushing towards the spoof class, whereas
+negative contributions are interpreted as pushing towards the
+bonafide class. This interpretation depends on the class and
+output representation being explained.
+
+SHAP explanations describe the behaviour of the trained model
+for a given input. They do not establish that a particular
+acoustic feature directly causes a recording to be genuine
+or synthetic, and they do not guarantee the correctness of
+the prediction.
+
+Figure~\ref{fig:deployment-result} presents the result interface
+after an audio recording has been analysed. The interface is
+organized into three main panels: the audio sample, the model
+verdict, and the explainability panel.
+
+The audio sample panel displays the submitted filename and
+a waveform visualization of the recording. The verdict panel
+shows the predicted class and the confidence value displayed
+by the application. The explainability panel presents the
+feature groups that influence the model output, together
+with their contribution values and directions.
+
+The interface allows users to inspect the prediction and
+its associated explanation in one place. This provides more
+information than displaying the predicted class alone and
+demonstrates how model interpretability can be incorporated
+into a synthetic speech detection application.
+
+Additionally, the interface is designed to present the analysis results in a clear and organized manner, enabling users to review the output without examining the underlying machine learning implementation. Separating the audio preview, classification verdict, and feature-level explanation makes the results easier to navigate and compare. This design also provides a foundation for future enhancements, such as displaying comparisons between different classifiers, maintaining a history of previous predictions, and providing more detailed visualizations of feature contributions. These improvements could further support the practical use of explainable synthetic speech detection systems.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]
+    {figures/deployment_prediction_shap.png}
+    \caption{Result interface with SHAP-based
+    feature explanations.}
+    \label{fig:deployment-result}
+\end{figure}
+
+
+\chapter{Git History}
+
+Git and GitHub were used to maintain the source code and track changes made during the development of SpoofSense. The project repository, \texttt{spectral-speech-detection}, contains commits documenting different development activities.
+Figure~\ref{fig:commit-history} shows the commit history of the project on the \texttt{main} branch. The visible commits include the development of the audio feature engineering pipeline, initial frontend components, frontend asset integration, Flask application development, and README documentation updates.
+
+The commit history provides a record of changes made to the project and helps track the evolution of its implementation. Each commit is associated with a message and timestamp, making it easier to identify and review individual changes.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/commit-history.png}
+    \caption{GitHub commit history of the SpoofSense project}
+    \label{fig:commit-history}
+\end{figure}
+Version control helped organize the project files and maintain a traceable record of code changes throughout development. The GitHub repository also provides a centralized location for managing the source code and project documentation.
+
+
+
+\chapter{Conclusions}
+
+This project investigated synthetic speech detection using handcrafted spectral features, traditional machine learning algorithms, and Explainable Artificial Intelligence (XAI). The primary objective was to distinguish genuine speech from spoofed audio while providing insights into the factors influencing model predictions.
+
+The ASVspoof 2019 Logical Access (LA) dataset was used for model development and evaluation. A 128-dimensional feature vector was extracted from each audio sample, incorporating MFCC statistics, delta and delta-delta coefficients, RMS energy, Zero-Crossing Rate, spectral centroid, and spectral rolloff. Random Forest, XGBoost, and Support Vector Machine (SVM) classifiers were trained and evaluated using accuracy, macro F1-score, class-wise precision and recall, confusion matrices, and Equal Error Rate (EER).
+
+The evaluation results showed comparable performance across the three classifiers, with accuracy values close to 86.7\%. SVM achieved the highest accuracy of approximately 86.80\% and a macro F1-score of 0.7550, whereas XGBoost achieved the lowest EER of approximately 11.51\%. These findings demonstrate that overall accuracy alone is insufficient for comparing detection models and that multiple evaluation metrics are necessary to assess their behaviour. Performance variations across spoofing attack types, particularly A17, A18, and A19, also highlighted limitations in generalization to different attack conditions.
+
+SHAP was incorporated to explain individual predictions by identifying the contributions of extracted acoustic features. This provides greater interpretability by presenting information about the features influencing a classification, without assuming that the explanations guarantee prediction correctness or improve model accuracy.
+
+The trained model and its explanation mechanism were integrated into a web application using Flask, connecting audio processing, feature extraction, classification, and SHAP-based explanations through a user interface. This demonstrated the practical integration of the developed detection pipeline into an accessible application.
+
+Overall, the project demonstrates the potential of combining acoustic feature engineering, conventional machine learning, and explainable AI for synthetic speech detection. Although the models achieved comparable evaluation performance, weaknesses across certain attack types indicate the need for further improvements in robustness and generalization. The developed system provides a foundation for future work on improved acoustic representations, unseen attack detection, and more reliable synthetic speech analysis.
+
+
+\chapter{Future Scope}
+
+The developed synthetic speech detection system provides a foundation for further research into the identification of artificially generated and manipulated speech. Although the evaluated machine learning models achieved comparable performance, the variations observed across different spoofing attack types indicate the need for further improvements in detection robustness and generalization. Several extensions can be considered to enhance the capabilities of the proposed system.
+
+Future work may explore deep learning architectures such as Convolutional Neural Networks (CNNs) and transformer-based audio models. Unlike conventional machine learning approaches that depend on manually designed features, these architectures can learn complex representations from audio signals. Comparing their performance with the current feature-based models could help determine whether learned representations improve the detection of challenging synthetic speech samples.
+
+The feature extraction process can also be extended by investigating additional acoustic representations that capture characteristics not fully represented by the existing 128-dimensional feature vector. Experiments with alternative feature combinations and feature selection techniques may help identify the most informative characteristics for distinguishing genuine and spoofed speech. Furthermore, evaluating the system on additional datasets, unseen spoofing attacks, and recordings collected under different acoustic conditions would provide a better understanding of its generalization capabilities. Particular attention could be given to attack types for which the current models exhibit weaker performance.
+
+Another direction for future development is the enhancement of the explainability component. SHAP currently provides feature-contribution explanations for individual predictions, helping users understand which extracted acoustic characteristics influence the model output. Future work could investigate the consistency of these explanations across different samples and classifiers. Other explainability techniques could also be explored to provide complementary insights into model behaviour. Such improvements may make the system's predictions easier to interpret while recognizing that explanations do not guarantee classification correctness.
+
+The deployed web application can be further improved to support batch audio analysis, more efficient processing, and clearer presentation of prediction results and explanations. Additional testing with varied audio formats, recording conditions, and practical usage scenarios could help identify deployment limitations. Appropriate input validation and processing safeguards could also be strengthened to improve the application's reliability.
+
+Overall, future development can focus on improving model performance, strengthening generalization to unseen spoofing attacks, expanding acoustic feature representations, and enhancing explainability and deployment capabilities. 
+
+
+
+\chapter{Appendix}
+
+\section{Minimum Software Requirements}
+
+The software requirements define the basic software environment necessary for developing, executing, and maintaining the synthetic speech detection system. The application combines audio processing, acoustic feature extraction, machine learning, explainability, and web technologies. The following software components are required to support these operations.
+
+\begin{itemize}
+
+    \item Operating System
+
+    A compatible operating system, such as Windows 10 or later or a modern Linux distribution, is required to run the development tools, Python libraries, and web application. The operating system should support the installation and execution of the required software dependencies.
+
+    \item Python Programming Language
+
+    Python is required for implementing the audio processing pipeline, extracting acoustic features, training machine learning models, evaluating classification performance, and developing the backend application. Its extensive collection of scientific computing and machine learning libraries makes it suitable for the proposed system.
+
+    \item Audio Processing Library
+
+    Librosa is required for loading audio samples and extracting acoustic characteristics. It supports the computation of Mel-Frequency Cepstral Coefficients (MFCCs), delta and delta-delta coefficients, Root Mean Square (RMS) energy, Zero-Crossing Rate (ZCR), spectral centroid, and spectral rolloff.
+
+    \item Data Processing Libraries
+
+    NumPy and Pandas are required for numerical computation, data manipulation, and handling extracted feature values. These libraries support the preparation of feature vectors and the organization of data used during model development and evaluation.
+
+    \item Machine Learning Libraries
+
+    Scikit-learn is required for feature scaling, Support Vector Machine (SVM) implementation, Random Forest classification, and model evaluation. XGBoost is required for training the gradient-boosted classification model. 
+    \item Explainable Artificial Intelligence Library
+
+    SHAP is required to generate feature-contribution explanations for model predictions. It helps identify which extracted acoustic features influence the output of the trained classifier and supports the presentation of prediction explanations in the web application.
+
+    \item Backend Framework
+
+    Flask is required to implement the backend API. It handles incoming audio files, invokes the feature extraction process, applies the trained model, and returns prediction results and associated explanations to the frontend.
+
+    \item Frontend Technologies
+
+    HTML, CSS, and JavaScript are required to develop the user interface. These technologies support audio file submission, presentation of classification results, and visualization of feature-contribution explanations.
+
+    \item Development Environment
+
+    Google Colab and Kaggle Notebooks provide cloud-based environments for experimentation, data processing, and model development. Visual Studio Code can be used for writing, editing, testing, and maintaining the application source code.
+
+    \item Version Control System
+
+    Git and GitHub are required for tracking source code changes, maintaining the project repository, and managing different stages of development.
+
+    \item Web Browser
+
+    A modern web browser, such as Google Chrome or Microsoft Edge, is required to access the deployed application and interact with its audio upload interface and prediction results.
+
+\end{itemize}
+
+\section{Minimum Hardware Requirements}
+
+The hardware requirements depend on the computational workload involved in audio feature extraction, model training, evaluation, and application execution. The following specifications represent a baseline for local development and running the trained model. Larger datasets and extensive feature extraction workloads may require additional resources.
+
+\begin{itemize}
+
+    \item Processor
+
+    An Intel Core i3 processor or an equivalent processor can serve as a basic configuration for running the web application, processing individual audio files, and performing inference using a trained traditional machine learning model. A more capable multi-core processor is beneficial when processing large numbers of audio samples or performing computationally intensive feature extraction.
+
+    \item Main Memory (RAM)
+
+    A minimum of 4 GB RAM may be sufficient for basic application execution and individual audio predictions under suitable conditions. However, 8 GB RAM or more is recommended for smoother development, simultaneous execution of development tools, and handling larger feature arrays. Processing the complete dataset or conducting extensive experiments may require additional memory.
+
+    \item Secondary Storage
+
+    At least 10 GB of available storage can serve as a basic allowance for application source files, installed libraries, trained model files, extracted features, and supporting resources. Additional storage may be necessary for the ASVspoof 2019 dataset, intermediate processing files, experimental results, and backups.
+
+    \item Graphics Processing Unit (GPU)
+
+    A dedicated GPU is not mandatory for the implemented Random Forest, XGBoost, and SVM models during ordinary inference. These traditional machine learning algorithms can run on a CPU. GPU resources may be useful for future experiments involving deep learning architectures, depending on the selected model and implementation.
+
+    \item Network Connectivity
+
+    An internet connection is required to access Google Colab and Kaggle Notebooks, download software dependencies, retrieve datasets when necessary, and access the GitHub repository. Network connectivity is also required when the application or its supporting resources are accessed through an online deployment.
+
+    \item Audio Input Support
+
+    The system requires access to digital audio files in formats supported by the audio processing pipeline. The available memory and processor capacity should be sufficient to load each input, perform the required preprocessing and feature extraction, and generate a prediction within an acceptable processing time.
+
+\end{itemize}
+
+The minimum configuration is intended primarily for development and execution of the trained detection application. Since model training and large-scale dataset processing can be more demanding than individual predictions, cloud notebook environments such as Google Colab and Kaggle Notebooks can provide additional computational resources when required. Actual resource requirements vary with dataset size, audio duration, processing workload, and the number of simultaneous requests.
+
+
+\chapter{References}
+
+\begin{enumerate}
+    \renewcommand{\labelenumi}{[\theenumi]}
+
+    \item M. Todisco, X. Wang, V. Vestman, M. Sahidullah, H. Delgado, A. Nautsch, J. Yamagishi, N. Evans, T. H. Kinnunen, and K. A. Lee, ``ASVspoof 2019: Future Horizons in Spoofed and Fake Audio Detection,'' in \textit{Proc. Interspeech}, 2019, pp. 1008--1012, doi: 10.21437/Interspeech.2019-2249.
+
+    \item X. Wang et al., ``ASVspoof 2019: A Large-Scale Public Database of Synthesized, Converted and Replayed Speech,'' \textit{Computer Speech \& Language}, vol. 64, Art. no. 101114, 2020, doi: 10.1016/j.csl.2020.101114.
+
+    \item T. Chen and C. Guestrin, ``XGBoost: A Scalable Tree Boosting System,'' in \textit{Proc. 22nd ACM SIGKDD Int. Conf. Knowledge Discovery and Data Mining}, 2016, pp. 785--794, doi: 10.1145/2939672.2939785.
+
+    \item L. Breiman, ``Random Forests,'' \textit{Machine Learning}, vol. 45, pp. 5--32, 2001, doi: 10.1023/A:1010933404324.
+
+    \item C. Cortes and V. Vapnik, ``Support-Vector Networks,'' \textit{Machine Learning}, vol. 20, pp. 273--297, 1995, doi: 10.1007/BF00994018.
+
+    \item S. M. Lundberg and S.-I. Lee, ``A Unified Approach to Interpreting Model Predictions,'' in \textit{Advances in Neural Information Processing Systems}, vol. 30, 2017.
+
+    \item S. M. Lundberg et al., ``From Local Explanations to Global Understanding with Explainable AI for Trees,'' \textit{Nature Machine Intelligence}, vol. 2, pp. 56--67, 2020, doi: 10.1038/s42256-019-0138-9.
+
+    \item F. Pedregosa et al., ``Scikit-learn: Machine Learning in Python,'' \textit{Journal of Machine Learning Research}, vol. 12, pp. 2825--2830, 2011.
+
+    \item B. McFee et al., ``librosa: Audio and Music Signal Analysis in Python,'' in \textit{Proc. 14th Python in Science Conference}, 2015, pp. 18--25, doi: 10.25080/Majora-7b98e3ed-003.
+
+    \item Python Software Foundation, ``Python Documentation.''
+    \url{https://docs.python.org/}.
+    
+    \item Librosa Development Team, ``librosa Documentation.''
+    \url{https://librosa.org/doc/latest/}.
+    
+    \item Scikit-learn Developers, ``Scikit-learn User Guide.''
+    \url{https://scikit-learn.org/stable/user_guide.html}.
+
+    \item K. A. Lee, A. Larcher, G. Wang, P. Kenny, N. Brummer,
+    D. van Leeuwen, and H. Aronowitz, ``The RedDots Data Collection
+    for Speaker Recognition,'' in \textit{Proceedings of Interspeech},
+    2015, pp. 2996--3000.
+
+    \item XGBoost Developers, ``XGBoost Documentation.''
+    \url{https://xgboost.readthedocs/}.
+    
+    \item Z. Wu, A. Khodabakhsh, C. Demiroglu, J. Yamagishi,
+    D. Saito, T. Toda, and S. King, ``SAS: A Speaker Verification
+    Spoofing Database Containing Diverse Attacks,'' in
+    \textit{Proceedings of the IEEE International Conference on
+    Acoustics, Speech and Signal Processing (ICASSP)}, 2015,
+    pp. 4440--4444.
+    
+    
+    \item SHAP Developers, ``SHAP Documentation.''
+    \url{https://shap.readthedocs.io/}.
+    
+    \item Pallets Projects, ``Flask Documentation.''
+    \url{https://flask.palletsprojects.com/}.
+    
+    \item T. Chen and C. Guestrin, ``XGBoost: A Scalable Tree Boosting
+    System,'' in \textit{Proceedings of the 22nd ACM SIGKDD International
+    Conference on Knowledge Discovery and Data Mining}, 2016, pp. 785--794,
+    doi: 10.1145/2939672.2939785.
+
+    \item ASVspoof, ``ASVspoof 2019 Challenge and Database.''
+    \url{https://www.asvspoof.org/}.
+    
+    \item F. Pedregosa \textit{et al.}, ``Scikit-learn: Machine Learning
+    in Python,'' \textit{Journal of Machine Learning Research},
+    vol. 12, pp. 2825--2830, 2011.
+    \url{https://jmlr.org/papers/v12/pedregosa11a.html}.
+    
+    
+\end{enumerate}
+
+
+\end{document}
